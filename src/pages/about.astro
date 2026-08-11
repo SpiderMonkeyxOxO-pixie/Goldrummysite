@@ -1,0 +1,132 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import { siteConfig } from '@/config/site';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about/' },
+];
+---
+
+<Layout
+  title="About Us"
+  description="Who runs this Gold Rummy information site, what it does and doesn't do, and how it handles unverified information about the Gold Rummy app."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="container narrow prose">
+      <p class="eyebrow">About</p>
+      <h1>About {siteConfig.siteName}</h1>
+      <p class="lede">
+        {siteConfig.siteName} is an independent information resource for
+        people looking into the Gold Rummy Android app — what it is, how to
+        download and install it, and what its features and promotions
+        typically involve.
+      </p>
+
+      <h2>What This Site Is</h2>
+      <p>
+        We publish plain-language guides covering the practical questions
+        people have before and after installing Gold Rummy: how the APK
+        download and installation process works, what the app's game
+        formats and features are, how promo codes generally function, and
+        how to keep both your device and your account reasonably safe while
+        doing any of that.
+      </p>
+
+      <h2>What This Site Is Not</h2>
+      <p>
+        This website is an independent information resource, not Gold
+        Rummy's official website, and unless stated otherwise on a specific
+        page, we have not confirmed an official affiliation with Gold
+        Rummy's publisher. We don't operate the app, can't access or modify
+        your account, and can't process deposits, withdrawals or
+        verification requests. For anything account-specific, Gold Rummy's
+        own in-app customer support is the only channel that can actually
+        help — see our <a href="/contact/">Contact page</a> for more on that
+        distinction.
+      </p>
+
+      <h2>How We Handle Facts We Can't Verify</h2>
+      <p>
+        Technical details like the current app version, file size, minimum
+        Android requirement and publisher name change over time and aren't
+        something we can responsibly guess. Where we haven't confirmed a
+        detail against an official source, we say so directly — either as a
+        plain status like "Coming Soon" or "To Be Confirmed", or as a
+        bracketed placeholder like <code>[COMPANY OR PUBLISHER]</code> —
+        rather than presenting an estimate as fact. The same applies to
+        promotional claims: we don't advertise a bonus amount, security
+        claim or licensing status we haven't verified.
+      </p>
+
+      <h2>Editorial Process</h2>
+      <p>
+        Articles and guides on this site are written by our editorial team,
+        reviewed for accuracy against publicly available information about
+        Rummy apps in this category, and updated when app details change.
+        Each guide lists its publish date, and articles that have been
+        substantively revised also show a "last reviewed" date.
+      </p>
+
+      <h2>Publisher Information</h2>
+      <div class="table-wrap">
+        <table class="table-specs">
+          <tbody>
+            <tr>
+              <th scope="row">Published by</th>
+              <td>{siteConfig.siteName}</td>
+            </tr>
+            <tr>
+              <th scope="row">Contact</th>
+              <td>{siteConfig.contactEmail}</td>
+            </tr>
+            <tr>
+              <th scope="row">Coverage focus</th>
+              <td>The Gold Rummy Android app — download, installation, features, promotions</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="notice notice--info about-notice">
+        <Icon name="shield" size={18} />
+        <span>
+          Questions, corrections, or a detail you'd like us to verify?
+          <a href="/contact/">Get in touch</a> — we'd rather fix an inaccurate
+          placeholder than leave it up.
+        </span>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 760px;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);
+  }
+
+  code {
+    background: var(--color-surface-raised);
+    padding: 0.1em 0.4em;
+    border-radius: var(--radius-sm);
+    font-size: 0.9em;
+  }
+
+  .about-notice {
+    margin-top: var(--space-7);
+  }
+</style>

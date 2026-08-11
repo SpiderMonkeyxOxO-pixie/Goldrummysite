@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import phoneArtwork from '@/assets/images/gold-rummy-phone.png';
+---
+
+<div class="phone-mockup">
+  <Image
+    src={phoneArtwork}
+    alt="Gold Rummy app screen on a smartphone, showing playing cards, coin winnings and the Gold Rummy logo"
+    width={600}
+    height={802}
+    format="webp"
+    loading="eager"
+    fetchpriority="high"
+    class="phone-mockup__img"
+  />
+</div>
+
+<style>
+  .phone-mockup {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .phone-mockup__img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 30px 46px rgba(4, 15, 10, 0.55));
+  }
+</style>

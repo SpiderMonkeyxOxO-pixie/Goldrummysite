@@ -1,0 +1,111 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config/site';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'DMCA / Content Removal', href: '/dmca/' },
+];
+
+const lastReviewed = 'August 2026';
+---
+
+<Layout
+  title="DMCA / Content Removal Policy"
+  description="How to request removal of copyrighted material or a content correction from this site, and what to include in your request."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="container narrow prose">
+      <p class="eyebrow">Legal</p>
+      <h1>DMCA / Content Removal Policy</h1>
+      <p class="text-sm text-faint">Last reviewed: {lastReviewed}</p>
+
+      <p>
+        {siteConfig.siteName} publishes original written content and
+        hand-built illustrations. We respect the intellectual property
+        rights of others and respond to good-faith reports of copyright
+        infringement or inaccurate content appearing on this site.
+      </p>
+
+      <h2>Requesting Removal of Copyrighted Material</h2>
+      <p>
+        If you believe content on this site infringes your copyright, send a
+        notice through our <a href="/contact/">Contact page</a> that
+        includes:
+      </p>
+      <ul>
+        <li>Identification of the copyrighted work you claim has been infringed.</li>
+        <li>The specific URL(s) on this site where the material appears.</li>
+        <li>Your contact information (name and email).</li>
+        <li>A statement that you have a good-faith belief the use is not authorized by the copyright owner, its agent, or the law.</li>
+        <li>A statement, made under penalty of perjury, that the information in your notice is accurate and that you are the copyright owner or authorized to act on their behalf.</li>
+        <li>Your physical or electronic signature.</li>
+      </ul>
+      <p>
+        We'll review valid requests promptly and remove or update the
+        material where appropriate.
+      </p>
+
+      <h2>Trademark Notice</h2>
+      <p>
+        "Gold Rummy" and any associated logos or trademarks belong to their
+        respective owners. References to Gold Rummy on this site are for
+        identification and informational purposes and do not imply
+        ownership, endorsement or official affiliation unless separately
+        stated. If you are the trademark owner and have a concern about how
+        the mark is used here, contact us through the same channel above.
+      </p>
+
+      <h2>Content Accuracy Corrections</h2>
+      <p>
+        Separate from copyright claims, if you're the official publisher of
+        Gold Rummy (or authorized to speak on its behalf) and want to
+        correct a technical detail, provide a verified fact, or flag
+        outdated information, we welcome that outreach directly — see our
+        <a href="/about/">About page</a> for how we handle verified versus
+        placeholder information.
+      </p>
+
+      <h2>Counter-Notices</h2>
+      <p>
+        If content you submitted was removed in error, you may send a
+        counter-notice through our <a href="/contact/">Contact page</a>
+        identifying the removed material and explaining why you believe its
+        removal was a mistake.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        All requests under this policy should be sent through our
+        <a href="/contact/">Contact page</a>. Include as much detail as
+        possible so we can respond quickly.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);
+  }
+
+  .text-sm.text-faint {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .prose ul {
+    list-style: disc;
+    padding-left: 1.25em;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+</style>

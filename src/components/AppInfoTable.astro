@@ -1,0 +1,116 @@
+---
+import { siteConfig } from '@/config/site';
+import { isPlaceholder } from '@/lib/placeholder';
+
+const rows: { label: string; value: string }[] = [
+  { label: 'Application name', value: siteConfig.appName },
+  { label: 'Latest version', value: siteConfig.appVersion },
+  { label: 'File type', value: siteConfig.fileType },
+  { label: 'Android requirement', value: siteConfig.minAndroid },
+  { label: 'File size', value: siteConfig.fileSize },
+  { label: 'Last updated', value: siteConfig.lastUpdated },
+  { label: 'Category', value: siteConfig.category },
+  { label: 'Language', value: siteConfig.language },
+];
+
+if (siteConfig.verified.publisher) {
+  rows.push({ label: 'Developer / publisher', value: siteConfig.publisher });
+}
+---
+
+<dl class="spec-grid">
+  {
+    rows.map((row) => {
+      const pending = isPlaceholder(row.value);
+      return (
+        <div class="spec-grid__item">
+          <dt>{row.label}</dt>
+          <dd>
+            <span class="spec-grid__value">{row.value}</span>
+            <span class={`spec-grid__status ${pending ? 'is-pending' : 'is-verified'}`}>
+              {pending ? 'Pending' : 'Verified'}
+            </span>
+          </dd>
+        </div>
+      );
+    })
+  }
+</dl>
+<p class="text-sm text-faint app-info-note">
+  Fields marked "Pending" haven't been confirmed against an official source
+  yet and are updated here as soon as they are.
+</p>
+
+<style>
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  .spec-grid__item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .spec-grid__item dt {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-faint);
+    margin-bottom: var(--space-1);
+  }
+
+  .spec-grid__item dd {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .spec-grid__value {
+    font-weight: 700;
+    color: var(--color-emerald);
+    word-break: break-word;
+  }
+
+  .spec-grid__status {
+    flex-shrink: 0;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.15em 0.5em;
+    border-radius: var(--radius-pill);
+  }
+
+  .spec-grid__status.is-verified {
+    color: var(--color-emerald-dark);
+    background: color-mix(in srgb, var(--color-emerald) 14%, transparent);
+  }
+
+  .spec-grid__status.is-pending {
+    color: var(--color-gold-ink);
+    background: color-mix(in srgb, var(--color-gold) 16%, transparent);
+  }
+
+  .app-info-note {
+    margin-top: var(--space-4);
+  }
+
+  @media (min-width: 400px) {
+    .spec-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .spec-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import DownloadCta from '@/components/DownloadCta.astro';
+---
+
+<Layout
+  title="Page Not Found"
+  description="The page you're looking for doesn't exist. Find Gold Rummy download, install and feature information from our homepage instead."
+  noIndex={true}
+>
+  <section class="section not-found">
+    <div class="container narrow">
+      <p class="not-found__code">404</p>
+      <h1>Page Not Found</h1>
+      <p class="lede">
+        The page you were looking for doesn't exist, may have moved, or the
+        link may have been mistyped. Here are a few places to try instead:
+      </p>
+
+      <div class="not-found__links">
+        <a href="/" class="btn btn-secondary">
+          <Icon name="chevron-right" size={16} />
+          <span>Homepage</span>
+        </a>
+        <a href="/download/" class="btn btn-secondary">
+          <Icon name="chevron-right" size={16} />
+          <span>Download page</span>
+        </a>
+        <a href="/how-to-install/" class="btn btn-secondary">
+          <Icon name="chevron-right" size={16} />
+          <span>Installation guide</span>
+        </a>
+        <a href="/blog/" class="btn btn-secondary">
+          <Icon name="chevron-right" size={16} />
+          <span>Blog</span>
+        </a>
+        <a href="/sitemap/" class="btn btn-secondary">
+          <Icon name="chevron-right" size={16} />
+          <span>Full sitemap</span>
+        </a>
+      </div>
+
+      <div class="not-found__cta">
+        <DownloadCta />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    text-align: center;
+    padding-block: var(--space-9);
+  }
+
+  .narrow {
+    max-width: 560px;
+    margin-inline: auto;
+  }
+
+  .not-found__code {
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 3rem + 3vw, 6rem);
+    font-weight: 800;
+    color: var(--color-green);
+    line-height: 1;
+    margin-bottom: var(--space-3);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .not-found__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-7);
+  }
+
+  .not-found__cta {
+    display: flex;
+    justify-content: center;
+  }
+</style>

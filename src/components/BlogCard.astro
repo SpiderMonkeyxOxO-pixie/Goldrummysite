@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  excerpt: string;
+  href: string;
+  date: string;
+}
+
+const { title, excerpt, href, date } = Astro.props;
+---
+
+<a href={href} class="blog-card card card--raised">
+  <span class="blog-card__accent" aria-hidden="true"></span>
+  <p class="blog-card__date text-sm text-faint">{date}</p>
+  <h3>{title}</h3>
+  <p class="blog-card__excerpt">{excerpt}</p>
+  <span class="blog-card__link">Read article →</span>
+</a>
+
+<style>
+  .blog-card {
+    display: block;
+    transition:
+      transform var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  @media (hover: hover) {
+    .blog-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-green);
+    }
+  }
+
+  .blog-card__accent {
+    display: block;
+    width: 40px;
+    height: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+
+  .blog-card__date {
+    margin-bottom: var(--space-2);
+  }
+
+  .blog-card h3 {
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+  }
+
+  .blog-card__excerpt {
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-4);
+  }
+
+  .blog-card__link {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-secondary-strong);
+  }
+</style>

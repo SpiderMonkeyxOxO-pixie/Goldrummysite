@@ -1,0 +1,65 @@
+---
+import Icon from './Icon.astro';
+import { siteConfig } from '@/config/site';
+import { isPlaceholder } from '@/lib/placeholder';
+
+interface Props {
+  size?: 'md' | 'lg';
+  block?: boolean;
+  showNote?: boolean;
+}
+
+const { size = 'md', block = false, showNote = true } = Astro.props;
+const pending = isPlaceholder(siteConfig.apkUrl);
+const classes = ['btn', 'btn-primary', block ? 'btn-block' : '', size === 'lg' ? 'download-cta__btn-lg' : '']
+  .filter(Boolean)
+  .join(' ');
+
+// While no verified APK link exists yet, the primary action must not look
+// like a working download — it points to a real, working destination (the
+// "meanwhile" directory, if set, otherwise the download page) instead of
+// the raw placeholder string, and is labelled for what it actually is.
+const href = pending ? siteConfig.meanwhile.url || '/download/' : siteConfig.apkUrl;
+const isExternal = pending && Boolean(siteConfig.meanwhile.url);
+---
+
+<div class="download-cta">
+  <a
+    href={href}
+    class={classes}
+    data-pending={pending}
+    target={isExternal ? '_blank' : undefined}
+    rel={isExternal ? 'noopener noreferrer' : undefined}
+    aria-describedby={pending && showNote ? 'download-cta-note' : undefined}
+  >
+    <Icon name={pending ? 'external' : 'download'} size={size === 'lg' ? 22 : 18} />
+    <span>{pending ? siteConfig.meanwhile.label : 'Download Gold Rummy APK'}</span>
+  </a>
+  {
+    pending && showNote && (
+      <p id="download-cta-note" class="text-sm text-faint download-cta__note">
+        The Gold Rummy APK isn't released yet — see the{' '}
+        <a href="/download/">download page</a> for current status, or join
+        our <a href={siteConfig.social.telegram}>Telegram channel</a> for
+        release news.
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .download-cta__btn-lg {
+    min-height: 56px;
+    padding: 1rem 2rem;
+    font-size: var(--text-lg);
+  }
+
+  .download-cta__note {
+    margin-top: var(--space-2);
+  }
+
+  .download-cta__note a {
+    color: var(--color-secondary-strong);
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Sitemap', href: '/sitemap/' },
+];
+
+const mainPages = [
+  { label: 'Home', href: '/' },
+  { label: 'Gold Rummy APK Download', href: '/download/' },
+  { label: 'How to Install Gold Rummy', href: '/how-to-install/' },
+  { label: 'Gold Rummy Features', href: '/features/' },
+  { label: 'Gold Rummy Promo Code', href: '/promo-code/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'About Us', href: '/about/' },
+  { label: 'Contact Us', href: '/contact/' },
+];
+
+const legalPages = [
+  { label: 'Disclaimer', href: '/disclaimer/' },
+  { label: 'Privacy Policy', href: '/privacy-policy/' },
+  { label: 'Terms and Conditions', href: '/terms-and-conditions/' },
+  { label: 'Responsible Gaming', href: '/responsible-gaming/' },
+  { label: 'DMCA / Content Removal Policy', href: '/dmca/' },
+];
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout
+  title="HTML Sitemap"
+  description="A full list of every page on this site, organized by section."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Site map</p>
+      <h1>Sitemap</h1>
+      <p class="lede">Every page on this site, in one place.</p>
+
+      <h2>Main Pages</h2>
+      <ul class="link-list">
+        {mainPages.map((page) => <li><a href={page.href}>{page.label}</a></li>)}
+      </ul>
+
+      <h2>Blog Posts</h2>
+      <ul class="link-list">
+        {posts.map((post) => <li><a href={`/blog/${post.slug}/`}>{post.data.title}</a></li>)}
+      </ul>
+
+      <h2>Legal & Policy Pages</h2>
+      <ul class="link-list">
+        {legalPages.map((page) => <li><a href={page.href}>{page.label}</a></li>)}
+      </ul>
+
+      <p class="text-sm text-faint xml-note">
+        Looking for the machine-readable version? See
+        <a href="/sitemap-index.xml">/sitemap-index.xml</a>.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);
+  }
+
+  .link-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .link-list a {
+    color: var(--color-secondary-strong);
+    font-size: var(--text-sm);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .xml-note {
+    margin-top: var(--space-6);
+  }
+
+  .xml-note a {
+    color: var(--color-secondary-strong);
+  }
+</style>

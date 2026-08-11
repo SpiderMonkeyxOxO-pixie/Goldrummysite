@@ -1,0 +1,238 @@
+---
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+import { siteConfig } from '@/config/site';
+import { isPlaceholder } from '@/lib/placeholder';
+
+const year = new Date().getFullYear();
+
+const exploreLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Download Gold Rummy APK', href: '/download/' },
+  { label: 'How to Install', href: '/how-to-install/' },
+  { label: 'Features', href: '/features/' },
+  { label: 'Promo Code', href: '/promo-code/' },
+];
+
+const blogLinks = [
+  { label: 'Blog', href: '/blog/' },
+  { label: 'About Us', href: '/about/' },
+  { label: 'Contact Us', href: '/contact/' },
+  { label: 'HTML Sitemap', href: '/sitemap/' },
+];
+
+const legalLinks = [
+  { label: 'Disclaimer', href: '/disclaimer/' },
+  { label: 'Privacy Policy', href: '/privacy-policy/' },
+  { label: 'Terms and Conditions', href: '/terms-and-conditions/' },
+  { label: 'Responsible Gaming', href: '/responsible-gaming/' },
+  { label: 'DMCA / Content Removal', href: '/dmca/' },
+];
+
+const contactEmail = siteConfig.contactEmail;
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__about">
+      <a href="/" class="brand">
+        <Logo size={34} />
+        <span class="brand__name brand__gold">Gold Rummy</span>
+      </a>
+      <p>
+        This is an independent information resource covering the Gold Rummy
+        Android app — download guidance, installation steps, feature
+        explanations and promo-code information. This site is not the app
+        itself and, unless stated otherwise, is not confirmed to be
+        officially affiliated with Gold Rummy's publisher.
+      </p>
+    </div>
+
+    <nav class="site-footer__col" aria-label="Explore">
+      <h2>Explore</h2>
+      <ul>
+        {exploreLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav class="site-footer__col" aria-label="Resources">
+      <h2>Resources</h2>
+      <ul>
+        {blogLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav class="site-footer__col" aria-label="Legal">
+      <h2>Legal</h2>
+      <ul>
+        {legalLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="site-footer__col">
+      <h2>Contact</h2>
+      <ul class="site-footer__contact">
+        <li>
+          <Icon name="mail" size={16} />
+          {isPlaceholder(contactEmail) ? (
+            <span>{contactEmail}</span>
+          ) : (
+            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+          )}
+        </li>
+        <li>
+          <Icon name="telegram" size={16} />
+          {siteConfig.social.telegram ? (
+            <a href={siteConfig.social.telegram} target="_blank" rel="noopener noreferrer">
+              {siteConfig.telegramUsername}
+            </a>
+          ) : (
+            <span>{siteConfig.telegramUsername}</span>
+          )}
+        </li>
+      </ul>
+      <p class="text-sm">
+        For account, payment or verification issues, contact Gold Rummy's
+        official in-app support — this site cannot access or change your
+        account.
+      </p>
+    </div>
+  </div>
+
+  <div class="container site-footer__notices">
+    <p class="notice notice--warning">
+      <Icon name="warning" size={18} />
+      <span>
+        <strong>Responsible gaming:</strong> Real-money gaming involves financial
+        risk and is not a guaranteed source of income. Play only with money you
+        can afford to lose, and stop if it stops being fun. Intended only for
+        users who meet the applicable legal age requirement
+        ({siteConfig.legalAge}) in their jurisdiction.
+      </span>
+    </p>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p class="text-sm text-faint">
+      © {year} {siteConfig.siteName} ({siteConfig.domain}). All rights
+      reserved. The Gold Rummy name and any related trademarks referenced
+      here belong to their respective owners.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    --footer-text: #ffffff;
+    --footer-text-muted: #cfe9d8;
+    --footer-text-faint: #9fc5ac;
+    background: var(--color-green-deep);
+    padding-block: var(--space-8) var(--space-6);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-7);
+  }
+
+  .site-footer__about {
+    max-width: 42ch;
+  }
+
+  .site-footer__about p {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--footer-text-muted);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+  }
+
+  .brand__name {
+    color: var(--footer-text);
+  }
+
+  .brand__gold {
+    color: var(--color-gold);
+  }
+
+  .site-footer__col h2 {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--footer-text-faint);
+    margin-bottom: var(--space-3);
+  }
+
+  .site-footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .site-footer__col a {
+    font-size: var(--text-sm);
+    color: var(--footer-text-muted);
+  }
+
+  .site-footer__col a:hover {
+    color: var(--color-accent);
+  }
+
+  .site-footer__contact li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--footer-text-muted);
+  }
+
+  .site-footer__contact a {
+    color: var(--footer-text-muted);
+  }
+
+  .site-footer__contact a:hover {
+    color: var(--color-accent);
+  }
+
+  .site-footer__col p.text-sm {
+    margin-top: var(--space-3);
+    color: var(--footer-text-muted);
+  }
+
+  .site-footer__notices {
+    margin-bottom: var(--space-6);
+  }
+
+  .site-footer__notices .notice {
+    align-items: flex-start;
+  }
+
+  .site-footer__bottom {
+    border-top: 1px solid color-mix(in srgb, var(--footer-text) 18%, transparent);
+    padding-top: var(--space-5);
+  }
+
+  .site-footer__bottom .text-faint {
+    color: var(--footer-text-faint);
+  }
+
+  @media (min-width: 640px) {
+    .site-footer__grid {
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-footer__grid {
+      grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+    }
+  }
+</style>

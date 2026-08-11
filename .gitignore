@@ -1,0 +1,27 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# generated types
+.astro/types.d.ts
+
+# environment variables
+.env
+.env.production
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# logs
+npm-debug.log*

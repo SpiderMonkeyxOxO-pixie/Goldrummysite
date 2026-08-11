@@ -1,0 +1,134 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import DownloadCta from '@/components/DownloadCta.astro';
+import { buildArticleSchema } from '@/lib/schema';
+import { siteConfig } from '@/config/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: post.data.title, href: `/blog/${post.slug}/` },
+];
+
+const dateFormatter = new Intl.DateTimeFormat('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const articleSchema = buildArticleSchema({
+  headline: post.data.title,
+  description: post.data.description,
+  publishedTime: post.data.pubDate.toISOString(),
+  modifiedTime: post.data.updatedDate?.toISOString(),
+  author: post.data.author,
+  url: `/blog/${post.slug}/`,
+});
+---
+
+<Layout
+  title={post.data.seoTitle ?? post.data.title}
+  description={post.data.description}
+  breadcrumbs={breadcrumbs}
+  ogType="article"
+  publishedTime={post.data.pubDate.toISOString()}
+  modifiedTime={post.data.updatedDate?.toISOString()}
+  extraSchema={[articleSchema]}
+>
+  <article class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Guide</p>
+      <h1>{post.data.title}</h1>
+      <div class="post-meta text-sm text-faint">
+        <span>By {post.data.author}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={post.data.pubDate.toISOString()}>
+          Published {dateFormatter.format(post.data.pubDate)}
+        </time>
+        {
+          post.data.updatedDate && (
+            <>
+              <span aria-hidden="true">·</span>
+              <time datetime={post.data.updatedDate.toISOString()}>
+                Last reviewed {dateFormatter.format(post.data.updatedDate)}
+              </time>
+            </>
+          )
+        }
+      </div>
+
+      <div class="prose post-content">
+        <Content />
+      </div>
+
+      <div class="post-cta card card--raised">
+        <h2>Ready to Download Gold Rummy?</h2>
+        <p class="text-muted">Head to the download page for the current version, file size and installation steps.</p>
+        <div class="post-cta__actions">
+          <DownloadCta />
+          <a href="/how-to-install/" class="btn btn-secondary">
+            <Icon name="install" size={18} />
+            <span>Installation guide</span>
+          </a>
+        </div>
+      </div>
+
+      <p class="text-sm text-faint publisher-line">
+        Published by {siteConfig.siteName}, an independent, unofficial information resource about the Gold Rummy app. Questions about this article? <a href="/contact/">Contact us</a>.
+      </p>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 760px;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-7);
+  }
+
+  .post-content {
+    margin-bottom: var(--space-8);
+  }
+
+  .post-cta {
+    text-align: center;
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .post-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .publisher-line {
+    margin-top: var(--space-6);
+  }
+
+  .publisher-line a {
+    color: var(--color-secondary-strong);
+    text-decoration: underline;
+  }
+</style>

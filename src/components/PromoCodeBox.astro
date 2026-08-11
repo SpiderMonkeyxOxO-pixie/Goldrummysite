@@ -1,0 +1,115 @@
+---
+import Icon from './Icon.astro';
+import { siteConfig } from '@/config/site';
+import { isPlaceholder } from '@/lib/placeholder';
+
+const codeIsPlaceholder = isPlaceholder(siteConfig.promoCode);
+---
+
+<div class="promo-box card card--raised">
+  <div class="promo-box__code-row">
+    <div class="promo-box__code" id="promo-code-value" data-placeholder={codeIsPlaceholder}>
+      {siteConfig.promoCode}
+    </div>
+    <button
+      type="button"
+      id="promo-copy-btn"
+      class="btn btn-secondary btn-sm"
+      disabled={codeIsPlaceholder}
+      aria-disabled={codeIsPlaceholder}
+    >
+      <Icon name="copy" size={16} />
+      <span id="promo-copy-label">Copy code</span>
+    </button>
+  </div>
+
+  {
+    codeIsPlaceholder ? (
+      <p class="notice notice--info">
+        <Icon name="warning" size={18} />
+        <span>
+          No verified promo code is confirmed right now. This box will show a
+          real, working code as soon as one is published by an official
+          source — check back or follow the Gold Rummy blog for updates.
+        </span>
+      </p>
+    ) : (
+      <p class="text-sm text-muted">
+        Copy the code above and enter it on the promo/referral code field
+        during Gold Rummy sign-up to apply it.
+      </p>
+    )
+  }
+
+  <ul class="promo-box__notes prose">
+    <li>Promo codes are typically entered once, during registration or from the app's rewards screen.</li>
+    <li>Eligibility, bonus amount and wagering terms are set by Gold Rummy and may change without notice.</li>
+    <li>Codes can expire or be region-restricted — always confirm current terms inside the official app before relying on an offer.</li>
+  </ul>
+</div>
+
+<script>
+  const btn = document.getElementById('promo-copy-btn') as HTMLButtonElement | null;
+  const label = document.getElementById('promo-copy-label');
+  const codeEl = document.getElementById('promo-code-value');
+
+  if (btn && label && codeEl && !btn.disabled) {
+    btn.addEventListener('click', async () => {
+      const code = codeEl.textContent?.trim() ?? '';
+      try {
+        await navigator.clipboard.writeText(code);
+        label.textContent = 'Copied!';
+        setTimeout(() => {
+          label.textContent = 'Copy code';
+        }, 2000);
+      } catch {
+        label.textContent = 'Copy failed';
+      }
+    });
+  }
+</script>
+
+<style>
+  .promo-box__code-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .promo-box__code {
+    flex: 1 1 auto;
+    min-width: 160px;
+    padding: var(--space-3) var(--space-4);
+    border: 1.5px dashed var(--color-accent-strong);
+    border-radius: var(--radius-md);
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-green-dark);
+    background: color-mix(in srgb, var(--color-accent) 14%, var(--color-surface));
+  }
+
+  .promo-box__code[data-placeholder='true'] {
+    color: var(--color-text-faint);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    letter-spacing: normal;
+  }
+
+  .promo-box__notes {
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    list-style: disc;
+    padding-left: 1.25em;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>

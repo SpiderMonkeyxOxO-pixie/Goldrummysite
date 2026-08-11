@@ -1,0 +1,315 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import DownloadCta from '@/components/DownloadCta.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import EditorialMeta from '@/components/EditorialMeta.astro';
+import { siteConfig } from '@/config/site';
+import { isPlaceholder } from '@/lib/placeholder';
+
+const apkPending = isPlaceholder(siteConfig.apkUrl);
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'How to Install', href: '/how-to-install/' },
+];
+
+const detailedSteps = [
+  {
+    title: 'Check your device meets the requirement',
+    body: `Before downloading anything, confirm your phone is running Android ${siteConfig.minAndroid} or newer (check under Settings → About phone → Android version) and that you have at least ${siteConfig.fileSize} of free storage.`,
+  },
+  {
+    title: 'Download the APK from the official page',
+    body: 'Open the Gold Rummy download page on this site and use the download button there. Avoid APK files sent through chat apps or shared by strangers, even if they claim to be the "latest version."',
+  },
+  {
+    title: 'Locate the downloaded file',
+    body: 'Once the download finishes, open your device’s notification shade or your file manager app and look for the Gold Rummy APK file, usually in a folder named "Download".',
+  },
+  {
+    title: 'Allow installation from this source',
+    body: 'Tapping the file will normally prompt Android to block the install with a message like "For your security, your phone is not allowed to install unknown apps from this source." Tap Settings from that prompt and enable the toggle for the specific app you used to open the file (commonly your browser or file manager) — not a system-wide setting.',
+  },
+  {
+    title: 'Confirm the installation',
+    body: 'Return to the APK file and tap it again. Review the permissions Android shows you, then tap Install. This usually takes a few seconds to under a minute.',
+  },
+  {
+    title: 'Open Gold Rummy and register',
+    body: 'Tap Open once installation finishes, or find the Gold Rummy icon on your home screen or app drawer. Follow the in-app steps to create and verify your account.',
+  },
+  {
+    title: 'Turn the install permission back off',
+    body: 'Go back to Settings → Apps → Special access → Install unknown apps and switch the toggle for your browser or file manager back off. This restores your device’s default protection against installing apps from outside the Play Store.',
+  },
+];
+
+const permissionNotes = [
+  {
+    title: 'Storage access',
+    body: 'Typically used to save game data, cached images and downloaded content locally on your device.',
+  },
+  {
+    title: 'Network access',
+    body: 'Required for the app to connect to Gold Rummy’s servers for gameplay, account sync and updates.',
+  },
+  {
+    title: 'Notifications',
+    body: 'Used to alert you about tournaments, promotions or account activity — usually optional and can be adjusted after installation.',
+  },
+];
+
+const troubleshootingRows = [
+  { symptom: '"App not installed" error', cause: 'A previous, corrupted or incompatible version of the app is already present, or the download did not complete fully.' },
+  { symptom: 'Installer blocked automatically', cause: '"Install unknown apps" is disabled for the app you used to open the file.' },
+  { symptom: 'File won’t open at all', cause: 'The download did not finish, or your file manager is not associating .apk files correctly.' },
+  { symptom: 'App installs but crashes on open', cause: 'Your Android version may be below the minimum requirement, or the device is low on free storage or memory.' },
+];
+
+const faqItems = [
+  {
+    question: 'Do I need to uninstall a previous version before installing?',
+    answer:
+      'Usually not — opening the new APK while an older version is installed is normally treated as an update, the same as updating any Android app. Only uninstall first if you’re seeing a persistent "app not installed" error after a fresh download.',
+  },
+  {
+    question: 'Is it safe to enable "install unknown apps" just for this?',
+    answer:
+      'Yes, when you scope it to a single app you trust (like your browser) rather than a system-wide setting. That permission only controls whether that specific app can trigger an install prompt — it doesn’t disable Android’s other protections, and you can switch it back off immediately afterward.',
+  },
+  {
+    question: 'Can I install Gold Rummy on a tablet?',
+    answer:
+      `Yes, as long as the tablet runs Android ${siteConfig.minAndroid} or newer and has enough free storage. The interface is built for phone-sized screens, so layout and touch targets on a large tablet display may look stretched.`,
+  },
+  {
+    question: 'Does installing an APK void my device warranty?',
+    answer:
+      'No. Installing an app from a downloaded APK file is not the same as rooting or modifying your device’s system software, and doesn’t typically affect a standard manufacturer warranty. If you’re unsure, check your specific manufacturer’s warranty terms.',
+  },
+];
+---
+
+<Layout
+  title="How to Install Gold Rummy APK"
+  description="A step-by-step Gold Rummy APK installation walkthrough for Android, covering permission prompts, what each one means, and common install errors."
+  breadcrumbs={breadcrumbs}
+  faq={faqItems}
+>
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Installation guide</p>
+      <h1>How to Install Gold Rummy on Android</h1>
+      <p class="lede">
+        Installing Gold Rummy means downloading its APK file and manually
+        approving the install, since the app isn't distributed through the
+        Play Store. The seven steps below cover the full process, including
+        exactly what Android's security prompts mean.
+      </p>
+      <EditorialMeta lastReviewed="August 2026" />
+
+      <div class="callout card">
+        {
+          apkPending && (
+            <p class="callout__status text-sm text-muted">
+              The Gold Rummy APK hasn't been released yet. The steps below
+              describe how installation will work once a verified download
+              link is published — join our Telegram channel to be notified
+              the moment it is.
+            </p>
+          )
+        }
+        <DownloadCta />
+      </div>
+
+      <h2>Before You Start</h2>
+      <ul class="checklist prose">
+        <li>You have downloaded the Gold Rummy APK from the official download page, not a forwarded file.</li>
+        <li>Your phone is running Android {siteConfig.minAndroid} or newer.</li>
+        <li>You have at least {siteConfig.fileSize} of free storage available.</li>
+        <li>You're installing on a device only you control — never on a shared or public device.</li>
+      </ul>
+
+      <h2>Step-by-Step Installation</h2>
+      <ol class="detailed-steps">
+        {
+          detailedSteps.map((step, index) => (
+            <li>
+              <div class="detailed-steps__number">{index + 1}</div>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <h2>What Each Install Permission Actually Does</h2>
+      <p class="text-muted">
+        Android will show you a permissions list before installation
+        completes. In general terms, here's what the common ones are for:
+      </p>
+      <div class="grid-cards-3 permission-grid">
+        {
+          permissionNotes.map((note) => (
+            <div class="card">
+              <h3>{note.title}</h3>
+              <p>{note.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-sm text-faint">
+        Exact permissions requested can vary by app version and Android
+        release. If a permission request seems unrelated to a card game,
+        it's reasonable to decline it and see whether the app still works —
+        or to hold off installing until you can confirm it.
+      </p>
+
+      <h2>Common Installation Problems</h2>
+      <div class="table-wrap">
+        <table class="table-specs troubleshoot-table">
+          <thead>
+            <tr>
+              <th scope="col">What you're seeing</th>
+              <th scope="col">Likely cause</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              troubleshootingRows.map((row) => (
+                <tr>
+                  <th scope="row">{row.symptom}</th>
+                  <td>{row.cause}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted">
+        For fixes to each of these, see our full
+        <a href="/blog/gold-rummy-apk-installation-problems-and-solutions/">APK installation problems and solutions guide</a>.
+      </p>
+
+      <p class="notice notice--info">
+        <Icon name="shield" size={18} />
+        <span>
+          After installing, remember to turn the "install unknown apps"
+          permission back off for the app you used — leaving it enabled
+          makes it easier for other, unrelated APKs to be installed without
+          the same confirmation prompt.
+        </span>
+      </p>
+
+      <h2>Installation FAQs</h2>
+      <FaqAccordion items={faqItems} />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 760px;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .callout {
+    margin-bottom: var(--space-7);
+  }
+
+  .callout__status {
+    margin-bottom: var(--space-4);
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-2xl);
+  }
+
+  .checklist {
+    list-style: disc;
+    padding-left: 1.25em;
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .detailed-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .detailed-steps li {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+
+  .detailed-steps__number {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: var(--text-sm);
+  }
+
+  .detailed-steps h3 {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-1);
+  }
+
+  .detailed-steps p {
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+
+  .permission-grid {
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-4);
+  }
+
+  .permission-grid h3 {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-2);
+  }
+
+  .permission-grid p {
+    font-size: var(--text-sm);
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .troubleshoot-table th[scope='col'] {
+    color: var(--color-text-faint);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .troubleshoot-table td,
+  .troubleshoot-table th[scope='row'] {
+    white-space: normal;
+  }
+
+  .narrow > .text-muted a {
+    color: var(--color-secondary-strong);
+    text-decoration: underline;
+  }
+</style>

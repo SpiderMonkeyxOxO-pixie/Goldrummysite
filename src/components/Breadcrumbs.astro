@@ -1,0 +1,72 @@
+---
+import Icon from './Icon.astro';
+
+interface Item {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="container">
+    {
+      items.map((item, index) => (
+        <li>
+          {index === items.length - 1 ? (
+            <span aria-current="page">{item.label}</span>
+          ) : (
+            <>
+              <a href={item.href}>{item.label}</a>
+              <Icon name="chevron-right" size={14} class="breadcrumbs__sep" />
+            </>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-raised);
+  }
+
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1);
+    padding-block: var(--space-3);
+    font-size: var(--text-xs);
+  }
+
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--color-text-faint);
+  }
+
+  .breadcrumbs a {
+    color: var(--color-text-faint);
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--color-secondary-strong);
+  }
+
+  .breadcrumbs [aria-current='page'] {
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumbs__sep {
+    opacity: 0.6;
+  }
+</style>

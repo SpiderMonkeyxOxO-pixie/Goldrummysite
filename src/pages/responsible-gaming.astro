@@ -1,0 +1,129 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import { siteConfig } from '@/config/site';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Responsible Gaming', href: '/responsible-gaming/' },
+];
+
+const lastReviewed = 'August 2026';
+
+const practices = [
+  'Set a spending limit before you start playing, and stop once you reach it — regardless of how a session is going.',
+  'Set a time limit for each session, separate from your spending limit.',
+  'Never play with borrowed money or funds earmarked for essentials.',
+  'Treat any winnings as a bonus, not as income you rely on.',
+  'Avoid playing to "win back" recent losses — that pattern is a common warning sign, not a strategy.',
+  'Use any deposit limit, cool-off or self-exclusion tools Gold Rummy offers in its account settings.',
+  'Take regular breaks, and avoid playing when tired, upset, or under the influence of alcohol.',
+];
+
+const warningSigns = [
+  'Spending more time or money than planned, on a repeated basis.',
+  'Feeling anxious, irritable or preoccupied with the game outside of playing sessions.',
+  'Hiding how much time or money you’re spending from people close to you.',
+  'Borrowing money, or dipping into essential funds, to keep playing.',
+  'Playing to chase losses rather than because you want to play.',
+];
+---
+
+<Layout
+  title="Responsible Gaming"
+  description="Our responsible gaming policy: who this site is for, practical limit-setting guidance, warning signs to watch for, and the age requirement for real-money play."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="container narrow prose">
+      <p class="eyebrow">Legal</p>
+      <h1>Responsible Gaming</h1>
+      <p class="text-sm text-faint">Last reviewed: {lastReviewed}</p>
+
+      <p class="notice notice--warning">
+        <Icon name="warning" size={18} />
+        <span>
+          Gold Rummy involves real-money gameplay on at least some tables.
+          Real-money gaming carries genuine financial risk and is not a
+          guaranteed or reliable source of income.
+        </span>
+      </p>
+
+      <h2>Who This Is For</h2>
+      <p>
+        Gold Rummy, and any real-money gaming content referenced on this
+        site, is intended only for users who meet the applicable legal age
+        requirement in their jurisdiction (status:{' '}
+        {siteConfig.legalAge.toLowerCase()}). If you don't meet that
+        requirement, or are unsure whether real-money gaming is permitted
+        where you live, do not create an account.
+      </p>
+
+      <h2>Good Habits Worth Building</h2>
+      <ul>
+        {practices.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>Warning Signs Worth Taking Seriously</h2>
+      <p>
+        If any of the following sound familiar, it's worth pausing and
+        reassessing rather than continuing on autopilot:
+      </p>
+      <ul>
+        {warningSigns.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>If You Need Support</h2>
+      <p>
+        If gaming is starting to affect your finances, relationships or
+        wellbeing, treat that as worth addressing directly. National and
+        state-level counselling and addiction-support services in India do
+        handle gambling-related concerns; we intend to list a specific,
+        verified helpline here once we've confirmed one. In the meantime,
+        Gold Rummy's own in-app support can point you to any self-exclusion
+        or limit-setting tools available in your account.
+      </p>
+
+      <h2>What This Site Does</h2>
+      <p>
+        We aim to present installation, feature and promotional information
+        without unsupported claims about guaranteed winnings, income,
+        security or legality. We do not use countdown timers, exaggerated
+        bonus claims, or other pressure tactics designed to rush a download
+        or sign-up decision. See our full
+        <a href="/blog/responsible-rummy-playing-guide-for-beginners/">responsible Rummy playing guide for beginners</a>
+        for more practical, beginner-focused advice.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy can be sent through our
+        <a href="/contact/">Contact page</a>. For anything account-specific,
+        please contact Gold Rummy's official in-app support instead.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);
+  }
+
+  .text-sm.text-faint {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .prose ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+</style>

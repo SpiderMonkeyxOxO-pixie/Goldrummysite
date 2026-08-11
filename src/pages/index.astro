@@ -1,0 +1,832 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import DownloadCta from '@/components/DownloadCta.astro';
+import PhoneMockup from '@/components/PhoneMockup.astro';
+import AppInfoTable from '@/components/AppInfoTable.astro';
+import FeatureCard from '@/components/FeatureCard.astro';
+import StepList from '@/components/StepList.astro';
+import PromoCodeBox from '@/components/PromoCodeBox.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import BlogCard from '@/components/BlogCard.astro';
+import { siteConfig } from '@/config/site';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const installSteps = [
+  {
+    title: 'Open the download page',
+    description:
+      'Go to this site’s Gold Rummy APK download page rather than a random search-result link — third-party mirrors are a common source of tampered files.',
+  },
+  {
+    title: 'Download the APK',
+    description:
+      'Tap the download button and wait for the file to finish saving to your device before opening it.',
+  },
+  {
+    title: 'Review the file',
+    description:
+      'Check the file name and size against what’s shown on the download page. If they don’t match, delete the file and download again from the official source.',
+  },
+  {
+    title: 'Allow installation from your browser or file manager',
+    description:
+      'Android blocks APK installs from outside the Play Store by default. When prompted, allow installation for that specific app (the exact menu wording varies by device and Android version).',
+  },
+  {
+    title: 'Install the application',
+    description:
+      'Open the downloaded APK and follow the on-screen installer. This typically takes under a minute on most devices.',
+  },
+  {
+    title: 'Open the app and complete registration',
+    description:
+      'Launch Gold Rummy, then follow the in-app steps to create and verify your account.',
+  },
+  {
+    title: 'Disable unnecessary installation permissions afterward',
+    description:
+      'Once installation is complete, turn the "install unknown apps" permission back off for that browser or file manager to keep your device’s default security posture.',
+  },
+];
+
+const registrationSteps = [
+  {
+    title: 'Download and open the application',
+    description: 'Install the Gold Rummy APK following the steps above, then launch it.',
+  },
+  {
+    title: 'Open the registration screen',
+    description: 'Look for a "Sign Up" or "Register" option on the app’s welcome screen.',
+  },
+  {
+    title: 'Enter the required details',
+    description: 'Provide the information the app asks for, typically a mobile number and basic profile details.',
+  },
+  {
+    title: 'Verify your account',
+    description: 'Complete whatever verification step the app requests, such as confirming an OTP sent by Gold Rummy directly.',
+  },
+  {
+    title: 'Create secure login credentials',
+    description: 'Set a strong, unique password or PIN that you don’t reuse on other accounts.',
+  },
+  {
+    title: 'Enter a promo or referral code, if applicable',
+    description: 'If you have a Gold Rummy code, enter it where the app requests it — see the Promo Code page for more.',
+  },
+  {
+    title: 'Contact official in-app support if you need help',
+    description: 'For anything account-related, use Gold Rummy’s own support channel inside the app rather than a third-party contact.',
+  },
+];
+
+const faqItems = [
+  {
+    question: 'What is Gold Rummy?',
+    answer:
+      'Gold Rummy is a mobile card-game app built around traditional Indian Rummy formats — including Points, Pool and Deals Rummy — where users can play against other players, including in cash-based tables.',
+  },
+  {
+    question: 'How do I download Gold Rummy APK?',
+    answer:
+      'Open this site’s download page, use the verified official download link once it is published there, and follow the on-screen prompts to save the APK file to your Android device.',
+  },
+  {
+    question: 'Is Gold Rummy available on Android?',
+    answer:
+      'Yes. Gold Rummy is distributed as an Android APK file rather than through the Google Play Store, which is why installing it requires temporarily allowing installation from outside the Play Store.',
+  },
+  {
+    question: 'What Android version is required?',
+    answer:
+      `The minimum Android version tracked on this site is ${siteConfig.minAndroid}. Always confirm the requirement shown on the download page against your own device’s Android version before installing.`,
+  },
+  {
+    question: 'How do I install the APK?',
+    answer:
+      'Download the file, check that it matches the details on the download page, allow installation from your browser or file manager when prompted, then open the APK and follow the installer. Our full how-to-install guide walks through each step.',
+  },
+  {
+    question: 'Where can I find the latest version?',
+    answer:
+      'The version currently tracked on this site is listed in the Quick App Information table on the homepage and download page, and is updated whenever a newer release is confirmed.',
+  },
+  {
+    question: 'How do I use a Gold Rummy promo code?',
+    answer:
+      'Enter the code in the promo or referral code field during registration, or from the app’s rewards/wallet screen, then confirm it inside the app before assuming it has been applied.',
+  },
+  {
+    question: 'Why is the APK not installing?',
+    answer:
+      'Common causes include insufficient device storage, an Android version below the minimum requirement, a corrupted or incomplete download, or installation from unknown sources being turned off. Our installation-problems guide covers each in more detail.',
+  },
+  {
+    question: 'How do I update the application?',
+    answer:
+      'Download the latest APK from the official source and install it over your existing app. Most Android devices treat this as an update rather than a fresh install, keeping your existing account and data.',
+  },
+  {
+    question: 'Where can I contact official support?',
+    answer:
+      'Gold Rummy’s official customer support is accessed from inside the app itself. This website is an independent information resource and cannot access, verify or manage your Gold Rummy account.',
+  },
+  {
+    question: 'Is real-money gaming legal in my location?',
+    answer:
+      'Real-money gaming regulations vary by state and country and can change over time. Confirm the current rules that apply to your specific location before participating — this site does not provide legal advice.',
+  },
+  {
+    question: 'What should I do if I experience a payment issue?',
+    answer:
+      'Contact Gold Rummy’s official in-app customer support directly, and never share OTPs, passwords or payment PINs with anyone outside the official app — including this website.',
+  },
+];
+
+const dateFormatter = new Intl.DateTimeFormat('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<Layout
+  title="Gold Rummy: App, APK & Install Info"
+  description="An independent guide to the Gold Rummy card game app: what it offers, how it works, and where to find APK download, installation and promo code details."
+  brandSuffix={false}
+  faq={faqItems}
+>
+  <!-- 1. HERO -->
+  <section class="hero section">
+    <div class="container hero__grid">
+      <div class="hero__copy animate-in">
+        <p class="eyebrow">Independent Player's Guide</p>
+        <h1>Gold Rummy: An Independent Player's Guide</h1>
+        <p class="hero__lede">
+          Everything you need to download, install and understand the Gold
+          Rummy Android app — in one place.
+        </p>
+        <div class="hero__actions">
+          <DownloadCta size="lg" showNote={false} />
+          <a href="/how-to-install/" class="btn btn-secondary">
+            <Icon name="install" size={18} />
+            <span>Installation guide</span>
+          </a>
+        </div>
+        <p class="hero__verify">
+          <Icon name="shield" size={15} />
+          <span>
+            Android {siteConfig.minAndroid}+ required — verified specs below
+          </span>
+        </p>
+      </div>
+      <div class="hero__visual animate-in animate-in--delay">
+        <PhoneMockup />
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. QUICK APP INFORMATION -->
+  <section class="section section-alt" aria-labelledby="quick-info-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">At a glance</p>
+        <h2 id="quick-info-heading">Quick App Information</h2>
+        <p>Key Gold Rummy APK facts in one place — cross-check these against the app before installing.</p>
+      </div>
+      <AppInfoTable />
+    </div>
+  </section>
+
+  <!-- 3. ABOUT GOLD RUMMY -->
+  <section class="section prose-section" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">About the app</p>
+        <h2 id="about-heading">What Is Gold Rummy?</h2>
+      </div>
+      <div class="prose">
+        <p>
+          Gold Rummy is a mobile card-game application built around Rummy,
+          one of India's most widely played card games. Inside the app,
+          players arrange a hand of cards into valid sequences and sets, with
+          support for common Indian Rummy formats such as Points Rummy, Pool
+          Rummy and Deals Rummy. Some tables are cash-based, meaning entry
+          fees and winnings involve real money rather than points alone.
+        </p>
+        <p>
+          As an APK-distributed application, Gold Rummy is installed by
+          downloading a file directly rather than through the Google Play
+          Store. That makes understanding the installation process — and
+          downloading only from a source you trust — more important than it
+          would be for a Play Store app.
+        </p>
+        <p>
+          Inside the app, users typically find a lobby of available tables
+          and contests, a wallet or rewards area, a place to enter a promo or
+          referral code, game rules and help content, and access to
+          Gold Rummy's own customer support. Exact screens and options can
+          change between app versions.
+        </p>
+        <h3>Who is Gold Rummy for?</h3>
+        <p>
+          The app is aimed at adult users in India who already enjoy playing
+          Rummy and want a mobile way to play it, including in cash-based
+          formats. It is not designed for, or intended to be used by, anyone
+          under the applicable legal age requirement for real-money gaming.
+        </p>
+        <h3>Regional and age restrictions</h3>
+        <p>
+          Real-money rummy was generally available in most Indian states
+          where games of skill were permitted. It was commonly restricted in
+          Andhra Pradesh, Assam, Nagaland, Odisha, Sikkim, and Telangana.
+          Availability in Tamil Nadu was subject to additional legal
+          restrictions and operator policies. Players were required to
+          verify the applicable laws in their location before participating.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. KEY FEATURES -->
+  <section class="section section-alt section-alt--green" aria-labelledby="features-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What to expect</p>
+        <h2 id="features-heading">Key Features</h2>
+        <p>An overview of what the Gold Rummy app offers, based on how apps of this type are typically structured.</p>
+      </div>
+      <div class="grid-cards-3">
+        <FeatureCard
+          icon="phone"
+          title="Mobile-friendly interface"
+          description="Gold Rummy is designed as a touch-first mobile app, with card selection, table joining and wallet actions all built for a phone screen rather than adapted from a desktop layout."
+        />
+        <FeatureCard
+          icon="cards"
+          title="Multiple Rummy formats"
+          description="Points Rummy, Pool Rummy and Deals Rummy are the formats most commonly offered by Indian Rummy apps, letting players choose a format that matches how much time and stake they want to commit per game."
+        />
+        <FeatureCard
+          icon="download"
+          title="Android APK distribution"
+          description={`Gold Rummy is installed via a direct APK download rather than the Play Store, so it works on any Android device meeting the minimum requirement of ${siteConfig.minAndroid}, even where the app isn't Play Store-listed.`}
+        />
+        <FeatureCard
+          icon="check"
+          title="Promotional offers"
+          description="Rummy apps commonly run welcome bonuses and periodic promo codes for new or returning players. Availability, eligibility and reward amounts are set by Gold Rummy and can change — see the Promo Code page for current status."
+        />
+        <FeatureCard
+          icon="chat"
+          title="Customer-support access"
+          description="Account, payment and verification questions are handled through Gold Rummy's own in-app support channel, which is the only place that can actually view or act on your account."
+        />
+        <FeatureCard
+          icon="shield"
+          title="Installation control"
+          description="Because the APK is installed outside the Play Store, Android requires you to explicitly allow the install — giving you a clear checkpoint to confirm you're installing from a source you trust."
+        />
+      </div>
+      {
+        siteConfig.verified.referralFeatures && (
+          <div class="grid-cards-3 features-extra">
+            <FeatureCard
+              icon="users"
+              title="Referral program"
+              description="Confirmed referral program details go here once verified."
+            />
+          </div>
+        )
+      }
+      {
+        siteConfig.verified.paymentOptions && (
+          <div class="grid-cards-3 features-extra">
+            <FeatureCard
+              icon="lock"
+              title="Account & payment options"
+              description="Confirmed payment method details go here once verified."
+            />
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- 5. DOWNLOAD SECTION -->
+  <section class="section download-section" aria-labelledby="download-heading">
+    <div class="container">
+      <div class="download-section__card card card--raised">
+        <div class="download-section__main">
+          <p class="eyebrow">Get the app</p>
+          <h2 id="download-heading">Download the Gold Rummy APK</h2>
+          <p class="text-muted">
+            Download only from a source you trust and verify the file
+            details below before installing.
+          </p>
+          <DownloadCta size="lg" showNote={false} />
+          <p class="notice notice--warning">
+            <Icon name="warning" size={18} />
+            <span>
+              <strong>Download-safety notice:</strong> only download the Gold
+              Rummy APK from a verified, official source. Files shared
+              through unknown links, forwarded messages or unofficial app
+              stores may be modified and are not covered by anything on this
+              site.
+            </span>
+          </p>
+        </div>
+        <dl class="download-section__meta">
+          <div>
+            <dt>Current version</dt>
+            <dd>{siteConfig.appVersion}</dd>
+          </div>
+          <div>
+            <dt>File size</dt>
+            <dd>{siteConfig.fileSize}</dd>
+          </div>
+          <div>
+            <dt>Android requirement</dt>
+            <dd>{siteConfig.minAndroid}</dd>
+          </div>
+        </dl>
+      </div>
+      <p class="text-sm text-muted download-section__help">
+        APK not installing? See our
+        <a href="/blog/gold-rummy-apk-installation-problems-and-solutions/">installation troubleshooting guide</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. HOW TO DOWNLOAD AND INSTALL -->
+  <section class="section section-alt" aria-labelledby="install-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Step by step</p>
+        <h2 id="install-heading">How to Download and Install Gold Rummy</h2>
+        <p>
+          Android menu names vary by device manufacturer and OS version — if
+          a label below doesn't match what you see exactly, look for the
+          closest equivalent option.
+        </p>
+      </div>
+      <StepList steps={installSteps} />
+      <a href="/how-to-install/" class="btn btn-secondary install-more-link">
+        <span>Read the full installation guide</span>
+        <Icon name="chevron-right" size={16} />
+      </a>
+    </div>
+  </section>
+
+  <!-- 7. REGISTRATION AND ACCOUNT GUIDE -->
+  <section class="section" aria-labelledby="registration-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Getting started</p>
+        <h2 id="registration-heading">Registration and Account Guide</h2>
+        <p>How a new player typically sets up a Gold Rummy account after installing the app.</p>
+      </div>
+      <StepList steps={registrationSteps} />
+      <p class="notice notice--info registration-note">
+        <Icon name="shield" size={18} />
+        <span>
+          This site never asks for, collects or stores your password, OTP,
+          payment PIN or any other account-verification details. Enter that
+          information only inside the official Gold Rummy app.
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 8. PROMO CODE SECTION -->
+  <section class="section section-alt section-alt--green" aria-labelledby="promo-heading">
+    <div class="container promo-section__container">
+      <div class="section-head">
+        <p class="eyebrow">Offers</p>
+        <h2 id="promo-heading">Gold Rummy Promo Code</h2>
+        <p>
+          Use a current Gold Rummy promo code, when one is available and
+          confirmed, to try for a registration bonus.
+        </p>
+      </div>
+      <PromoCodeBox />
+      <p class="text-sm text-faint promo-section__terms">
+        Promotional availability, eligibility and reward amounts are decided
+        by Gold Rummy and are subject to its official terms, which take
+        precedence over anything summarised here.
+      </p>
+    </div>
+  </section>
+
+  <!-- 9. GAME AND FEATURE CATEGORIES -->
+  <section class="section" aria-labelledby="categories-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Inside the app</p>
+        <h2 id="categories-heading">Game Categories</h2>
+        <p>Only categories we can confirm are listed here; unverified categories are left out rather than guessed.</p>
+      </div>
+      <div class="grid-cards-3">
+        <FeatureCard
+          icon="cards"
+          title="Rummy"
+          description="The core game category: Points Rummy for quick single-deal games, Pool Rummy for elimination-style play across multiple deals, and Deals Rummy for a fixed number of deals per match."
+        />
+      </div>
+      {
+        !siteConfig.verified.additionalGameCategories && (
+          <p class="text-sm text-faint categories-note">
+            Additional game categories (such as other card games or casual
+            games) will be listed here once we can confirm they're actually
+            part of the Gold Rummy app.
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- 10. SECURITY AND RESPONSIBLE USE -->
+  <section class="section section-alt" aria-labelledby="security-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Play safely</p>
+        <h2 id="security-heading">Security and Responsible Use</h2>
+      </div>
+      <div class="grid-cards-2 security-grid">
+        <div class="card">
+          <Icon name="download" size={20} />
+          <p>Download the APK only from a verified, official source — never from a forwarded link or unofficial store.</p>
+        </div>
+        <div class="card">
+          <Icon name="lock" size={20} />
+          <p>Never share your OTP, password or payment PIN with anyone, including people claiming to represent this website.</p>
+        </div>
+        <div class="card">
+          <Icon name="shield" size={20} />
+          <p>Review the permissions the APK requests before installing, and turn off "install unknown apps" access again afterward.</p>
+        </div>
+        <div class="card">
+          <Icon name="check" size={20} />
+          <p>Add or verify payment details only inside the official Gold Rummy app, never through a link sent outside it.</p>
+        </div>
+        <div class="card">
+          <Icon name="chat" size={20} />
+          <p>For account, payment or verification issues, contact Gold Rummy's official in-app customer support directly.</p>
+        </div>
+        <div class="card">
+          <Icon name="clock" size={20} />
+          <p>Set a personal spending and playing-time limit before you start, and stick to it regardless of how a session is going.</p>
+        </div>
+        <div class="card">
+          <Icon name="warning" size={20} />
+          <p>Avoid playing with borrowed money, and stop playing if gaming starts to negatively affect your finances or wellbeing.</p>
+        </div>
+        <div class="card">
+          <Icon name="users" size={20} />
+          <p>Real-money gaming carries genuine financial risk and is not a reliable or guaranteed source of income.</p>
+        </div>
+      </div>
+      <p class="text-sm text-muted security-more-link">
+        Read our full <a href="/responsible-gaming/">Responsible Gaming policy</a>
+        for warning signs to watch for and where to find support.
+      </p>
+    </div>
+  </section>
+
+  <!-- 11. FAQ -->
+  <section class="section" aria-labelledby="faq-heading">
+    <div class="container faq-section__container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Questions</p>
+        <h2 id="faq-heading">Frequently Asked Questions</h2>
+      </div>
+      <FaqAccordion items={faqItems} />
+    </div>
+  </section>
+
+  <!-- 12. BLOG PREVIEW -->
+  <section class="section section-alt section-alt--green" aria-labelledby="blog-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Guides</p>
+        <h2 id="blog-heading">From the Blog</h2>
+        <p>In-depth guides on downloading, installing and getting the most out of Gold Rummy.</p>
+      </div>
+      <div class="grid-cards-3">
+        {
+          posts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              excerpt={post.data.excerpt}
+              href={`/blog/${post.slug}/`}
+              date={dateFormatter.format(post.data.pubDate)}
+            />
+          ))
+        }
+      </div>
+      <a href="/blog/" class="btn btn-secondary blog-view-all">
+        <span>View all articles</span>
+        <Icon name="chevron-right" size={16} />
+      </a>
+    </div>
+  </section>
+
+  <!-- 13. FINAL CTA -->
+  <section class="section final-cta">
+    <div class="container final-cta__card card card--raised">
+      <h2>Ready to Get Gold Rummy?</h2>
+      <ul class="final-cta__checklist">
+        <li><Icon name="check" size={18} /> Review the app information above</li>
+        <li><Icon name="check" size={18} /> Confirm your device meets the Android requirement</li>
+        <li><Icon name="check" size={18} /> Use the verified download link</li>
+        <li><Icon name="check" size={18} /> Read the installation guide before you begin</li>
+        <li><Icon name="check" size={18} /> Play responsibly and within your limits</li>
+      </ul>
+      <DownloadCta size="lg" />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 55% at 78% 38%, rgba(212, 175, 55, 0.16), transparent 65%),
+      linear-gradient(165deg, var(--color-emerald-dark) 0%, var(--color-emerald-deep) 62%, #050e0a 100%);
+    overflow: hidden;
+    padding-block: var(--space-7) var(--space-8);
+  }
+
+  .hero::before {
+    /* restrained card-suit motif, not a busy repeating texture */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(rgba(212, 175, 55, 0.16) 1.5px, transparent 1.5px),
+      radial-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+    background-size: 46px 46px, 26px 26px;
+    background-position: 0 0, 13px 13px;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  /* Supplied premium artwork as the hero background on mobile, where its
+     portrait composition (radial gold glow, card-suit motifs, light
+     streaks) fits the viewport; desktop keeps the CSS gradient above since
+     the image is portrait-only and would crop poorly at wide ratios. */
+  @media (max-width: 639px) {
+    .hero {
+      /* dark scrim keeps the heading/lede legible over the image's bright
+         glow area without hiding the artwork underneath */
+      background-image:
+        linear-gradient(180deg, rgba(4, 10, 7, 0.6) 0%, rgba(4, 10, 7, 0.32) 38%, rgba(4, 10, 7, 0.2) 100%),
+        url('/images/hero-bg-mobile.webp');
+      background-size:
+        cover,
+        cover;
+      background-position:
+        top center,
+        top center;
+      background-repeat: no-repeat, no-repeat;
+    }
+
+    .hero::before {
+      display: none;
+    }
+  }
+
+  .hero::after {
+    /* thin gold divider at the base of the hero */
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--gradient-gold);
+  }
+
+  .hero__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .hero__copy .eyebrow {
+    color: var(--color-gold);
+  }
+
+  .hero__copy h1 {
+    color: var(--color-on-emerald);
+  }
+
+  .hero__lede {
+    margin-top: var(--space-4);
+    font-size: var(--text-lg);
+    max-width: 56ch;
+    color: var(--color-on-emerald-muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .hero__actions .btn-secondary {
+    color: var(--color-on-emerald);
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+
+  @media (hover: hover) {
+    .hero__actions .btn-secondary:hover {
+      background: rgba(212, 175, 55, 0.12);
+      border-color: var(--color-gold);
+      color: var(--color-on-emerald);
+    }
+  }
+
+  .hero__verify {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+    color: var(--color-on-emerald-faint);
+  }
+
+  .hero__verify :global(svg) {
+    color: var(--color-gold);
+    flex-shrink: 0;
+  }
+
+  .hero__visual {
+    max-width: 260px;
+    margin-inline: auto;
+  }
+
+  .prose-section .prose {
+    max-width: 72ch;
+  }
+
+  .features-extra {
+    margin-top: var(--space-4);
+  }
+
+  .download-section__card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .download-section__main h2 {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .download-section__main .btn {
+    margin-block: var(--space-5);
+  }
+
+  .download-section__meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 640px) {
+    .download-section__meta {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .download-section__meta dt {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-faint);
+    margin-bottom: var(--space-1);
+  }
+
+  .download-section__meta dd {
+    margin: 0;
+    font-weight: 700;
+    color: var(--color-green);
+  }
+
+  .download-section__help {
+    margin-top: var(--space-4);
+  }
+
+  .download-section__help a {
+    color: var(--color-secondary-strong);
+    text-decoration: underline;
+  }
+
+  .install-more-link,
+  .blog-view-all {
+    margin-top: var(--space-6);
+  }
+
+  .registration-note {
+    margin-top: var(--space-6);
+  }
+
+  .promo-section__container {
+    max-width: 680px;
+  }
+
+  .promo-section__terms {
+    margin-top: var(--space-4);
+  }
+
+  .categories-note {
+    margin-top: var(--space-4);
+  }
+
+  .security-grid .card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    color: var(--color-green);
+  }
+
+  .security-grid .card p {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+
+  .security-more-link {
+    margin-top: var(--space-5);
+  }
+
+  .security-more-link a {
+    color: var(--color-secondary-strong);
+    text-decoration: underline;
+  }
+
+  .faq-section__container {
+    max-width: 760px;
+  }
+
+  .final-cta__card {
+    text-align: center;
+    padding: var(--space-7) var(--space-5);
+  }
+
+  .final-cta__checklist {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin: var(--space-5) auto var(--space-6);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .final-cta__checklist li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .final-cta__checklist :global(svg) {
+    color: var(--color-success);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .hero__grid {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--space-7);
+    }
+
+    .hero__visual {
+      max-width: 340px;
+      margin-inline: auto;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .download-section__card {
+      grid-template-columns: 1.4fr 1fr;
+    }
+
+    .download-section__meta {
+      grid-template-columns: 1fr;
+      border-top: none;
+      border-left: 1px solid var(--color-border);
+      padding-top: 0;
+      padding-left: var(--space-6);
+    }
+  }
+</style>

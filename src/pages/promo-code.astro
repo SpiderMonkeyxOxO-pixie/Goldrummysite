@@ -1,0 +1,127 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import PromoCodeBox from '@/components/PromoCodeBox.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import EditorialMeta from '@/components/EditorialMeta.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Promo Code', href: '/promo-code/' },
+];
+
+const faqItems = [
+  {
+    question: 'What does a Gold Rummy promo code actually do?',
+    answer:
+      'A promo code is entered during sign-up or from the rewards screen to unlock whatever offer Gold Rummy is currently running for that code — commonly a registration bonus or wallet credit, though the exact reward depends on the specific code and campaign.',
+  },
+  {
+    question: 'Is there a guaranteed Gold Rummy registration bonus?',
+    answer:
+      'No bonus amount is guaranteed. Registration bonuses are set by Gold Rummy, can change between campaigns, and may come with wagering or eligibility conditions — always check the current official terms rather than assuming a figure you may have seen elsewhere.',
+  },
+  {
+    question: 'Where do I enter a promo code in the app?',
+    answer:
+      'Most Rummy apps ask for a promo or referral code either as an optional field during registration, or from a dedicated "Redeem code" / rewards section after you’ve signed up. If you don’t see the field immediately, check the app’s wallet or offers screen.',
+  },
+  {
+    question: 'Can I use a promo code after I’ve already registered?',
+    answer:
+      'This depends entirely on Gold Rummy’s own rules — some codes are sign-up only, others can be redeemed later from a rewards screen. Check the terms attached to your specific code.',
+  },
+];
+---
+
+<Layout
+  title="Gold Rummy Promo Code"
+  description="Current Gold Rummy promo code information: how to apply a code, what a registration bonus typically involves, and where promotional terms come from."
+  breadcrumbs={breadcrumbs}
+  faq={faqItems}
+>
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Offers</p>
+      <h1>Gold Rummy Promo Code</h1>
+      <p class="lede">
+        A Gold Rummy promo code is a short text code entered during sign-up
+        or from the rewards screen to unlock a specific offer — commonly a
+        registration bonus or wallet credit. This page holds the current
+        code we can confirm, plus honest guidance on how these offers
+        generally work.
+      </p>
+      <EditorialMeta lastReviewed="August 2026" />
+
+      <PromoCodeBox />
+
+      <h2>How to Apply a Gold Rummy Code</h2>
+      <ol class="detailed-steps prose">
+        <li>Copy the promo code shown above, once one is confirmed and available.</li>
+        <li>Open the Gold Rummy app and go to the registration screen, or the rewards/wallet section if you're already registered.</li>
+        <li>Paste the code into the promo or referral code field and confirm.</li>
+        <li>Check the app for confirmation that the code was accepted before assuming the offer has been applied.</li>
+      </ol>
+
+      <h2>What a "Registration Bonus" Usually Means</h2>
+      <div class="prose">
+        <p>
+          Rummy apps typically use a registration bonus to encourage new
+          users to sign up and try a cash table for the first time. In
+          practice, this can take the form of bonus wallet credit, a
+          discount on table entry fees, or free entries to specific
+          contests — and it usually comes with conditions attached, such as
+          a minimum playthrough before the bonus (or winnings from it) can
+          be withdrawn.
+        </p>
+        <p>
+          Because these terms are set entirely by Gold Rummy and can change
+          between campaigns, this page deliberately avoids quoting a
+          specific bonus amount unless it has been verified against an
+          official source. Treat any bonus figure you've seen elsewhere with
+          the same caution.
+        </p>
+      </div>
+
+      <p class="notice notice--warning">
+        <Icon name="warning" size={18} />
+        <span>
+          <strong>Terms can change without notice.</strong> Always confirm
+          current eligibility, expiry and wagering conditions inside the
+          official Gold Rummy app before relying on a promo code or bonus
+          offer.
+        </span>
+      </p>
+
+      <h2>Promo Code FAQs</h2>
+      <FaqAccordion items={faqItems} />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 760px;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-2xl);
+  }
+
+  .detailed-steps {
+    list-style: decimal;
+    padding-left: 1.25em;
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+</style>

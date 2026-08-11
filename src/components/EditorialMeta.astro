@@ -1,0 +1,28 @@
+---
+import { siteConfig } from '@/config/site';
+
+interface Props {
+  lastReviewed: string;
+}
+
+const { lastReviewed } = Astro.props;
+---
+
+<p class="editorial-meta text-sm text-faint">
+  Last reviewed {lastReviewed} by {siteConfig.siteName} ·
+  <a href="/about/">About this site</a> ·
+  <a href="/contact/">Contact</a>
+</p>
+
+<style>
+  .editorial-meta {
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .editorial-meta a {
+    color: var(--color-secondary-strong);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

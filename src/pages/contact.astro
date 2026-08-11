@@ -1,0 +1,210 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import { siteConfig } from '@/config/site';
+import { isPlaceholder } from '@/lib/placeholder';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Contact', href: '/contact/' },
+];
+
+const contactReady = !isPlaceholder(siteConfig.contactEmail);
+---
+
+<Layout
+  title="Contact Us"
+  description="How to reach this site's team for content questions or corrections, and why account or payment issues belong with Gold Rummy's official support instead."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Contact</p>
+      <h1>Contact Us</h1>
+      <p class="lede">
+        This page is for reaching {siteConfig.siteName} — the team behind
+        this website's content. It is not a support channel for your Gold
+        Rummy account.
+      </p>
+
+      <p class="notice notice--warning">
+        <Icon name="warning" size={18} />
+        <span>
+          <strong>Need help with your Gold Rummy account, a deposit or a withdrawal?</strong>
+          Contact Gold Rummy's official in-app customer support directly. We
+          cannot access, view or change your account from here, and we will
+          never ask you for your password, OTP or payment PIN.
+        </span>
+      </p>
+
+      <h2>Reach Our Team</h2>
+      <p class="text-muted">
+        For content questions, corrections, partnership or DMCA inquiries
+        related to this website specifically:
+      </p>
+      <ul class="contact-list">
+        <li>
+          <Icon name="mail" size={18} />
+          {
+            contactReady ? (
+              <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+            ) : (
+              <span>{siteConfig.contactEmail}</span>
+            )
+          }
+        </li>
+        <li>
+          <Icon name="telegram" size={18} />
+          {siteConfig.social.telegram ? (
+            <a href={siteConfig.social.telegram} target="_blank" rel="noopener noreferrer">
+              {siteConfig.telegramUsername}
+            </a>
+          ) : (
+            <span>{siteConfig.telegramUsername}</span>
+          )}
+        </li>
+      </ul>
+
+      <h2>Send a Message</h2>
+      {
+        contactReady ? (
+          <form
+            id="contact-form"
+            class="contact-form card"
+            action={`mailto:${siteConfig.contactEmail}`}
+            method="post"
+            enctype="text/plain"
+          >
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required />
+            </div>
+            {/* Honeypot: hidden from real visitors, catches basic bots that fill every field */}
+            <div class="field field--honeypot" aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <Icon name="mail" size={18} />
+              <span>Send message</span>
+            </button>
+            <p class="text-sm text-faint form-note">
+              Submitting opens your email app with this message pre-filled —
+              we don't collect or store anything entered here on our servers.
+            </p>
+          </form>
+        ) : (
+          <p class="notice notice--info">
+            <Icon name="warning" size={18} />
+            <span>
+              A direct contact form isn't available yet — an official
+              contact address hasn't been configured. Check back soon.
+            </span>
+          </p>
+        )
+      }
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      const honeypot = form.querySelector<HTMLInputElement>('#website');
+      if (honeypot && honeypot.value.trim() !== '') {
+        event.preventDefault();
+      }
+    });
+  }
+</script>
+
+<style>
+  .narrow {
+    max-width: 640px;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-2xl);
+  }
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--color-text-muted);
+  }
+
+  .contact-list a {
+    color: var(--color-secondary-strong);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .field label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .field input,
+  .field textarea {
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-bg);
+    color: var(--color-text);
+    resize: vertical;
+  }
+
+  .field input:focus-visible,
+  .field textarea:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 1px;
+  }
+
+  .field--honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-note {
+    margin-top: calc(-1 * var(--space-1));
+  }
+</style>

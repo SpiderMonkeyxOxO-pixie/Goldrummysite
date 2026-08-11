@@ -1,0 +1,154 @@
+---
+import Icon from './Icon.astro';
+import { siteConfig } from '@/config/site';
+import { isPlaceholder } from '@/lib/placeholder';
+
+const hasTelegram = Boolean(siteConfig.social.telegram);
+const hasEmail = !isPlaceholder(siteConfig.contactEmail);
+
+// Nothing real to show yet — don't render a widget that opens to placeholder text.
+const hasAnyChannel = hasTelegram || hasEmail;
+---
+
+{
+  hasAnyChannel && (
+    <div class="floating-contact" id="floating-contact">
+      <div class="floating-contact__menu" id="floating-contact-menu" role="menu" hidden>
+        {hasTelegram && (
+          <a href={siteConfig.social.telegram} target="_blank" rel="noopener noreferrer" role="menuitem" class="floating-contact__item">
+            <Icon name="telegram" size={18} />
+            <span>Telegram</span>
+          </a>
+        )}
+        {hasEmail && (
+          <a href={`mailto:${siteConfig.contactEmail}`} role="menuitem" class="floating-contact__item">
+            <Icon name="mail" size={18} />
+            <span>Email</span>
+          </a>
+        )}
+      </div>
+      <button
+        type="button"
+        class="floating-contact__toggle"
+        id="floating-contact-toggle"
+        aria-expanded="false"
+        aria-controls="floating-contact-menu"
+      >
+        <Icon name="chat" size={22} class="floating-contact__icon-open" />
+        <Icon name="close" size={22} class="floating-contact__icon-close" />
+        <span class="visually-hidden">Contact us</span>
+      </button>
+    </div>
+  )
+}
+
+<script>
+  const toggle = document.getElementById('floating-contact-toggle');
+  const menu = document.getElementById('floating-contact-menu');
+  const wrapper = document.getElementById('floating-contact');
+
+  if (toggle && menu && wrapper) {
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      toggle.classList.toggle('is-open', !isOpen);
+      menu.hidden = isOpen;
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!wrapper.contains(event.target as Node) && toggle.getAttribute('aria-expanded') === 'true') {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('is-open');
+        menu.hidden = true;
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('is-open');
+        menu.hidden = true;
+        toggle.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .floating-contact {
+    position: fixed;
+    right: var(--space-4);
+    bottom: var(--space-4);
+    z-index: 95;
+  }
+
+  .floating-contact__toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gradient-gold);
+    color: var(--color-accent-ink);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .floating-contact__icon-close {
+    display: none;
+  }
+
+  .floating-contact__toggle.is-open .floating-contact__icon-open {
+    display: none;
+  }
+
+  .floating-contact__toggle.is-open .floating-contact__icon-close {
+    display: block;
+  }
+
+  .floating-contact__menu {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + var(--space-3));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    box-shadow: var(--shadow-lg);
+    min-width: 168px;
+  }
+
+  .floating-contact__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  .floating-contact__item:hover {
+    background: var(--color-surface-raised);
+    color: var(--color-emerald-dark);
+  }
+
+  .floating-contact__item :global(svg) {
+    color: var(--color-emerald);
+    flex-shrink: 0;
+  }
+
+  /* Keep clear of the sticky mobile download bar, and lift with it if the
+     visitor hasn't dismissed it yet. */
+  @media (max-width: 899px) {
+    :global(body.has-mobile-bar) .floating-contact {
+      bottom: calc(var(--mobile-bar-height) + var(--space-3) + env(safe-area-inset-bottom, 0px));
+    }
+  }
+</style>

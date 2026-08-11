@@ -1,0 +1,144 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Icon from '@/components/Icon.astro';
+import DownloadCta from '@/components/DownloadCta.astro';
+import AppInfoTable from '@/components/AppInfoTable.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import EditorialMeta from '@/components/EditorialMeta.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Download', href: '/download/' },
+];
+
+const faqItems = [
+  {
+    question: 'Is this the official Gold Rummy download link?',
+    answer:
+      "The link on this page uses the download address configured centrally on this site. Always cross-check the file details below against what you expect before installing, and treat any link you're unsure about with caution.",
+  },
+  {
+    question: 'Why is Gold Rummy distributed as an APK instead of through the Play Store?',
+    answer:
+      'Real-money card-game apps are frequently restricted or removed from the Google Play Store due to platform policy, which is why many of them — including Gold Rummy — are distributed as a direct APK download instead.',
+  },
+  {
+    question: 'Will downloading the APK harm my device?',
+    answer:
+      'A genuine APK from a verified source behaves like any other app. The risk comes from tampered files on unofficial mirrors, which is why this page emphasises downloading only from a source you trust and reviewing the file before installing.',
+  },
+];
+---
+
+<Layout
+  title="Gold Rummy APK Download"
+  description="Download the Gold Rummy APK for Android: current version, file size, Android requirement, and how to check you're downloading from a trustworthy source."
+  breadcrumbs={breadcrumbs}
+  faq={faqItems}
+>
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Download</p>
+      <h1>Gold Rummy APK Download</h1>
+      <p class="lede">
+        The Gold Rummy APK is the installer file for the Gold Rummy Android
+        card-game app. This page centralises the current download link and
+        file details so you have one place to check them before installing.
+      </p>
+      <EditorialMeta lastReviewed="August 2026" />
+
+      <div class="download-panel card card--raised">
+        <DownloadCta size="lg" showNote={false} />
+        <p class="notice notice--warning">
+          <Icon name="warning" size={18} />
+          <span>
+            <strong>Only download from a verified, official source.</strong>
+            Files shared through forwarded messages, unofficial app stores or
+            unfamiliar links may have been modified and are not covered by
+            anything on this site.
+          </span>
+        </p>
+      </div>
+
+      <h2>Gold Rummy APK File Details</h2>
+      <AppInfoTable />
+
+      <h2>Why the APK Instead of the Play Store?</h2>
+      <div class="prose">
+        <p>
+          Google Play's developer policies restrict real-money card and
+          casino-style apps in many regions, so apps like Gold Rummy are
+          commonly distributed as a direct APK download rather than through
+          the Play Store. That's a normal distribution model for this
+          category of app — but it also means the usual Play Store
+          safeguards (automatic malware scanning, verified publisher
+          listings) don't apply automatically, which is why the checklist
+          below matters.
+        </p>
+      </div>
+
+      <h2>Before You Install: A Quick Safety Checklist</h2>
+      <ul class="checklist prose">
+        <li>Download the APK only from a link you trust — ideally this page, kept up to date centrally.</li>
+        <li>Compare the downloaded file's size against the figure in the table above.</li>
+        <li>Avoid APK files sent to you directly by strangers, unsolicited messages, or ads promising guaranteed bonuses.</li>
+        <li>Review the Android permissions the installer requests before confirming installation.</li>
+        <li>Keep your device's Play Protect (or equivalent) scanning enabled even when installing outside the Play Store.</li>
+      </ul>
+
+      <p class="text-muted">
+        Ready to install? Continue to the
+        <a href="/how-to-install/">full step-by-step installation guide</a>.
+        Running into an install error instead? Read
+        <a href="/blog/gold-rummy-apk-installation-problems-and-solutions/">APK installation problems and solutions</a>.
+      </p>
+
+      <h2>Download FAQs</h2>
+      <FaqAccordion items={faqItems} />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 760px;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .download-panel {
+    margin-bottom: var(--space-8);
+  }
+
+  .download-panel .notice {
+    margin-top: var(--space-5);
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-2xl);
+  }
+
+  .checklist {
+    list-style: disc;
+    padding-left: 1.25em;
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .narrow > .text-muted {
+    margin-top: var(--space-6);
+  }
+
+  .narrow > .text-muted a {
+    color: var(--color-secondary-strong);
+    text-decoration: underline;
+  }
+</style>

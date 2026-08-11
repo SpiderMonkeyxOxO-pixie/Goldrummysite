@@ -1,0 +1,117 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config/site';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Disclaimer', href: '/disclaimer/' },
+];
+
+const lastReviewed = 'August 2026';
+---
+
+<Layout
+  title="Disclaimer"
+  description="Important disclaimers about this site's independent, informational nature, and the limits of the information published here."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="container narrow prose">
+      <p class="eyebrow">Legal</p>
+      <h1>Disclaimer</h1>
+      <p class="text-sm text-faint">Last reviewed: {lastReviewed}</p>
+
+      <h2>Independent Information Resource</h2>
+      <p>
+        {siteConfig.siteName} is an independent website that publishes
+        information about the Gold Rummy Android application, including
+        download guidance, installation steps, feature explanations and
+        promotional information. Unless explicitly stated otherwise on a
+        specific page, this site has not confirmed an official affiliation,
+        partnership, sponsorship or endorsement relationship with Gold
+        Rummy's publisher or developer.
+      </p>
+
+      <h2>No Guarantee of Accuracy</h2>
+      <p>
+        We make a genuine effort to keep the information on this site
+        accurate and current, including clearly labelling any detail we
+        haven't been able to verify as a placeholder rather than presenting
+        it as fact. Even so, app details such as version numbers, file
+        sizes, features, promotional terms and legal status can change
+        without notice on the publisher's side, and this site may not
+        reflect a change immediately. Always confirm current details inside
+        the official Gold Rummy app before relying on anything published
+        here.
+      </p>
+
+      <h2>No Financial or Legal Advice</h2>
+      <p>
+        Nothing on this site constitutes financial, legal or professional
+        advice. Content describing bonuses, promo codes or gameplay formats
+        is provided for general informational purposes only and should not
+        be treated as a guarantee of any specific outcome, reward or
+        legality in your location.
+      </p>
+
+      <h2>Financial Risk</h2>
+      <p>
+        Gold Rummy involves real-money gameplay on at least some tables.
+        Real-money gaming carries genuine financial risk, is not a
+        guaranteed or reliable source of income, and outcomes depend on a
+        combination of skill and chance. Only play with money you can afford
+        to lose. See our <a href="/responsible-gaming/">Responsible Gaming</a>
+        page for more.
+      </p>
+
+      <h2>Jurisdiction and Legality</h2>
+      <p>
+        The legal status of real-money card games varies by country and, in
+        India, by state, and can change over time. We do not make a
+        blanket claim that Gold Rummy is legal, licensed or available
+        everywhere. You are responsible for confirming whether real-money
+        gaming is permitted in your specific location before creating an
+        account or playing.
+      </p>
+
+      <h2>Third-Party Links</h2>
+      <p>
+        This site may link to Gold Rummy's own app or to other external
+        resources. We aren't responsible for the content, accuracy or
+        practices of destinations outside our own domain.
+      </p>
+
+      <h2>Downloads</h2>
+      <p>
+        We encourage downloading the Gold Rummy APK only from a verified,
+        official source, and we take reasonable care in how we present
+        download information. We aren't responsible for files obtained from
+        third-party mirrors, unofficial app stores, or links shared outside
+        this site.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions or corrections regarding this disclaimer can be sent
+        through our <a href="/contact/">Contact page</a>.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);
+  }
+
+  .text-sm.text-faint {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+</style>

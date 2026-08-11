@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import BlogCard from '@/components/BlogCard.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Blog', href: '/blog/' },
+];
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<Layout
+  title="Gold Rummy Blog"
+  description="Guides on downloading, installing, updating and playing Gold Rummy responsibly — each article answers one specific question in plain English."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Guides</p>
+      <h1>Gold Rummy Blog</h1>
+      <p class="lede">
+        Practical, standalone guides for Gold Rummy players — from your
+        first install to keeping the app updated safely.
+      </p>
+
+      <div class="grid-cards-3 blog-grid">
+        {
+          posts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              excerpt={post.data.excerpt}
+              href={`/blog/${post.slug}/`}
+              date={dateFormatter.format(post.data.pubDate)}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .lede {
+    font-size: var(--text-lg);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-7);
+    max-width: 65ch;
+  }
+
+  .blog-grid {
+    align-items: stretch;
+  }
+</style>

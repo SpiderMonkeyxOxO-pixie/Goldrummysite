@@ -1,0 +1,27 @@
+# Gold Rummy (goldrummy.site)
+
+> Independent, unofficial information resource about the Gold Rummy Android card-game app: what it is, how to download and install the APK, its features, and promo-code information. Not confirmed to be officially affiliated with Gold Rummy's publisher.
+
+This site (goldrummy.site) is a third-party website, not the Gold Rummy app itself and not Gold Rummy's official website. It publishes plain-language guides on downloading and installing the Gold Rummy APK, understanding its Rummy game formats (Points, Pool, Deals), and using promo codes — written for users researching the app before or after installing it. Technical facts that have not been confirmed against an official source (app version, file size, minimum Android version, publisher name, promo code) are shown as clearly labelled placeholders rather than invented. Account, payment and verification issues are explicitly directed to Gold Rummy's own in-app support, which this site cannot access.
+
+## Key pages
+
+- [Home](https://goldrummy.site/): What Gold Rummy is and an overview of this site's coverage.
+- [Gold Rummy APK Download](https://goldrummy.site/download/): Current download link, file details, and a download-safety checklist.
+- [How to Install Gold Rummy](https://goldrummy.site/how-to-install/): Step-by-step Android installation walkthrough, including what each permission prompt means.
+- [Gold Rummy Promo Code](https://goldrummy.site/promo-code/): Current promo code (when confirmed) and how registration bonuses generally work.
+- [Gold Rummy App Features](https://goldrummy.site/features/): Game formats, interface and support access inside the app.
+- [Blog](https://goldrummy.site/blog/): Long-form guides on installation troubleshooting, safe updates, and responsible play.
+
+## Policies
+
+- [About Us](https://goldrummy.site/about/): Who publishes this site and how content is reviewed.
+- [Contact Us](https://goldrummy.site/contact/): How to reach this site (not Gold Rummy's account support).
+- [Responsible Gaming](https://goldrummy.site/responsible-gaming/): Age requirement, limit-setting guidance, and warning signs.
+- [Disclaimer](https://goldrummy.site/disclaimer/): Independence, accuracy and financial-risk disclosures.
+- [Privacy Policy](https://goldrummy.site/privacy-policy/)
+- [Terms and Conditions](https://goldrummy.site/terms-and-conditions/)
+
+## Optional
+
+- [HTML Sitemap](https://goldrummy.site/sitemap/): Full list of every page on the site.

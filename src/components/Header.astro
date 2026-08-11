@@ -1,0 +1,269 @@
+---
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+import { siteConfig } from '@/config/site';
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Download', href: '/download/' },
+  { label: 'How to Install', href: '/how-to-install/' },
+  { label: 'Features', href: '/features/' },
+  { label: 'Promo Code', href: '/promo-code/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a href="/" class="brand" aria-label={`${siteConfig.siteName} — home`}>
+      <Logo size={38} />
+      <span class="brand__name brand__gold">Gold Rummy</span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={currentPath === item.href ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a href="/download/" class="btn btn-primary btn-sm site-header__cta">
+        <Icon name="download" size={16} />
+        <span class="site-header__cta-full">Download APK</span>
+        <span class="site-header__cta-short">APK</span>
+      </a>
+      <button
+        type="button"
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        id="menu-toggle"
+      >
+        <Icon name="menu" class="menu-toggle__icon-open" />
+        <Icon name="close" class="menu-toggle__icon-close" />
+        <span class="visually-hidden">Open menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-nav" class="mobile-nav" hidden>
+    <nav aria-label="Mobile">
+      <ul>
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={currentPath === item.href ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a href="/download/" class="btn btn-primary btn-block">
+      <Icon name="download" size={18} />
+      <span>Download Gold Rummy APK</span>
+    </a>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const panel = document.getElementById('mobile-nav');
+
+  if (toggle && panel) {
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      toggle.classList.toggle('is-open', !isOpen);
+      panel.hidden = isOpen;
+      document.body.classList.toggle('nav-open', !isOpen);
+    });
+
+    panel.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('is-open');
+        panel.hidden = true;
+        document.body.classList.remove('nav-open');
+      });
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-emerald-deep);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+    box-shadow: var(--shadow-md);
+  }
+
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: var(--header-height);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .brand__name {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .brand__gold {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    color: var(--color-gold);
+  }
+
+  .primary-nav {
+    display: none;
+  }
+
+  .primary-nav ul {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .primary-nav a {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-on-emerald-muted);
+    padding-block: var(--space-2);
+    white-space: nowrap;
+  }
+
+  .primary-nav a:hover,
+  .primary-nav a[aria-current='page'] {
+    color: var(--color-gold);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  .site-header__cta {
+    padding-inline: 0.9rem;
+  }
+
+  .site-header__cta-full {
+    display: none;
+  }
+
+  .site-header__cta-short {
+    display: inline;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: var(--color-on-emerald);
+  }
+
+  .menu-toggle__icon-close {
+    display: none;
+  }
+
+  .menu-toggle.is-open .menu-toggle__icon-open {
+    display: none;
+  }
+
+  .menu-toggle.is-open .menu-toggle__icon-close {
+    display: block;
+  }
+
+  .mobile-nav {
+    border-top: 1px solid rgba(212, 175, 55, 0.22);
+    padding: var(--space-5) var(--container-pad);
+    background: var(--color-emerald-deep);
+  }
+
+  .mobile-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-bottom: var(--space-5);
+  }
+
+  .mobile-nav a {
+    display: block;
+    padding: var(--space-3) var(--space-2);
+    font-weight: 600;
+    font-size: var(--text-base);
+    border-radius: var(--radius-sm);
+    color: var(--color-on-emerald-muted);
+  }
+
+  .mobile-nav a:hover,
+  .mobile-nav a[aria-current='page'] {
+    background: rgba(212, 175, 55, 0.12);
+    color: var(--color-gold);
+  }
+
+  @media (min-width: 480px) {
+    .site-header__cta-full {
+      display: inline;
+    }
+
+    .site-header__cta-short {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .primary-nav {
+      display: block;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: none;
+    }
+  }
+</style>

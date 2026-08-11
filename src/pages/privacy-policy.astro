@@ -1,0 +1,122 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config/site';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Privacy Policy', href: '/privacy-policy/' },
+];
+
+const lastReviewed = 'August 2026';
+---
+
+<Layout
+  title="Privacy Policy"
+  description="How this site handles data: no tracking scripts are active by default, the contact form doesn't store submissions, and what changes if that ever changes."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="container narrow prose">
+      <p class="eyebrow">Legal</p>
+      <h1>Privacy Policy</h1>
+      <p class="text-sm text-faint">Last reviewed: {lastReviewed}</p>
+
+      <h2>Overview</h2>
+      <p>
+        This policy explains what happens to information when you visit
+        {siteConfig.siteName}. We've kept the site's technical footprint
+        deliberately small: as published, this site does not run analytics,
+        advertising or third-party tracking scripts of any kind.
+      </p>
+
+      <h2>Information We Collect</h2>
+      <p>
+        Because no tracking or analytics scripts are active, we do not
+        collect browsing behavior, device fingerprints, or usage analytics
+        through this site. Your web host or hosting provider may still keep
+        standard server-level logs (such as IP address and request
+        timestamps) as part of normal infrastructure operation, independent
+        of anything this site adds.
+      </p>
+
+      <h2>The Contact Form</h2>
+      <p>
+        Our <a href="/contact/">Contact page</a> form opens your own email
+        application with your message pre-filled, rather than submitting
+        data to a server we control. That means the name, email address and
+        message you enter are not stored, logged or transmitted by this
+        website — they only leave your device if and when you actually send
+        the resulting email yourself.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        This site does not set tracking or advertising cookies. If a
+        strictly functional cookie is ever required (for example, to
+        remember a display preference), it will be limited to that purpose
+        and this policy will be updated to describe it.
+      </p>
+
+      <h2>No Sensitive Data, Ever</h2>
+      <p>
+        This website will never ask you to enter your Gold Rummy password,
+        OTP, payment PIN, or other account-verification details. If you're
+        ever asked for this information on a page claiming to be part of
+        {siteConfig.siteName}, do not enter it, and please report it through
+        our <a href="/contact/">Contact page</a>.
+      </p>
+
+      <h2>Third-Party Links</h2>
+      <p>
+        Pages on this site link to the Gold Rummy app and, occasionally, to
+        other external resources. Those destinations operate under their
+        own privacy practices, which we don't control and this policy
+        doesn't cover.
+      </p>
+
+      <h2>Children's Privacy</h2>
+      <p>
+        This site is intended for adult users who meet the applicable legal
+        age requirement for real-money gaming and is not directed at
+        children. We do not knowingly collect information from minors.
+      </p>
+
+      <h2>If Analytics Are Added Later</h2>
+      <p>
+        Should this site ever add analytics or similar tooling, the
+        integration will be added deliberately and disclosed here before it
+        goes live, including what's measured and how to opt out where
+        applicable — it will not be enabled silently.
+      </p>
+
+      <h2>Changes to This Policy</h2>
+      <p>
+        We may update this policy as the site evolves. Material changes will
+        update the "last reviewed" date at the top of this page.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Privacy questions can be sent through our
+        <a href="/contact/">Contact page</a>.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);
+  }
+
+  .text-sm.text-faint {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+</style>

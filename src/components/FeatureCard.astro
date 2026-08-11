@@ -1,0 +1,48 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  icon: Parameters<typeof Icon>[0]['name'];
+  title: string;
+  description: string;
+}
+
+const { icon, title, description } = Astro.props;
+---
+
+<div class="feature-card card">
+  <div class="feature-card__icon">
+    <Icon name={icon} size={22} />
+  </div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+</div>
+
+<style>
+  .feature-card {
+    border-top: 3px solid transparent;
+    border-image: var(--gradient-gold) 1;
+  }
+
+  .feature-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-gold);
+    color: var(--color-accent-ink);
+    margin-bottom: var(--space-4);
+  }
+
+  .feature-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2);
+  }
+
+  .feature-card p {
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+</style>

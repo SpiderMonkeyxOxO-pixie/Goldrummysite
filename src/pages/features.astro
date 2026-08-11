@@ -1,0 +1,176 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import FeatureCard from '@/components/FeatureCard.astro';
+import DownloadCta from '@/components/DownloadCta.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import EditorialMeta from '@/components/EditorialMeta.astro';
+import { siteConfig } from '@/config/site';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Features', href: '/features/' },
+];
+
+const faqItems = [
+  {
+    question: 'What Rummy formats does Gold Rummy support?',
+    answer:
+      'Points Rummy, Pool Rummy and Deals Rummy — the three formats most Indian Rummy apps build around. See the game formats section above for how each one is scored.',
+  },
+  {
+    question: 'Does Gold Rummy work without an internet connection?',
+    answer:
+      'No. Like other real-money multiplayer card apps, Gold Rummy needs an active internet connection to sync tables, scores and your wallet in real time.',
+  },
+  {
+    question: 'Can I use Gold Rummy on more than one device?',
+    answer:
+      'Most Rummy apps tie an account to a single active session at a time rather than simultaneous multi-device play, though you can typically install the app on more than one device and log in with the same account. Check the app’s own account settings for its specific policy.',
+  },
+  {
+    question: 'Is there a desktop or web version of Gold Rummy?',
+    answer:
+      'This site covers the Android APK specifically. If Gold Rummy offers a desktop or browser-based version, it would be confirmed and linked here once verified rather than assumed.',
+  },
+];
+---
+
+<Layout
+  title="Gold Rummy App Features"
+  description="A closer look at what the Gold Rummy Android app offers: game formats, interface, support access and how the app compares to a Play Store listing."
+  breadcrumbs={breadcrumbs}
+  faq={faqItems}
+>
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Inside the app</p>
+      <h1>Gold Rummy App Features</h1>
+      <p class="lede">
+        Gold Rummy's core features are its three Rummy formats, a touch-first
+        mobile interface, and in-app support and version tracking. Here's a
+        practical look at what you can expect once the app is installed.
+      </p>
+      <EditorialMeta lastReviewed="August 2026" />
+
+      <h2>Game Formats</h2>
+      <div class="grid-cards-3">
+        <FeatureCard
+          icon="cards"
+          title="Points Rummy"
+          description="The fastest format: a single deal, with points tallied at the end based on the cards left in losing hands. Good for a quick game with a clear, immediate result."
+        />
+        <FeatureCard
+          icon="clock"
+          title="Pool Rummy"
+          description="Play continues across multiple deals, with players eliminated once their accumulated points cross a fixed limit (commonly 101 or 201). Rewards consistent play over a single lucky hand."
+        />
+        <FeatureCard
+          icon="check"
+          title="Deals Rummy"
+          description="A fixed number of deals are played, and whoever holds the fewest points once all deals are complete takes the prize pool. Good for players who want a defined game length."
+        />
+      </div>
+
+      <h2>Interface and Experience</h2>
+      <div class="grid-cards-3">
+        <FeatureCard
+          icon="phone"
+          title="Touch-first design"
+          description="Card selection, sequencing and declaring are built around tap and drag gestures sized for a phone screen, rather than a desktop layout squeezed onto mobile."
+        />
+        <FeatureCard
+          icon="language"
+          title="Language support"
+          description={`Gold Rummy's supported interface languages are listed as ${siteConfig.language} in our Quick App Information table, and updated once we can confirm the current list.`}
+        />
+        <FeatureCard
+          icon="refresh"
+          title="Regular updates"
+          description="Like most actively maintained Rummy apps, Gold Rummy is expected to receive periodic updates for stability, new features and security fixes — install the latest APK when one becomes available."
+        />
+      </div>
+
+      <h2>Account, Support & Trust</h2>
+      <div class="grid-cards-3">
+        <FeatureCard
+          icon="chat"
+          title="In-app customer support"
+          description="Account, payment and verification issues are handled through Gold Rummy's own in-app support — this is the only channel that can actually view or act on your account."
+        />
+        <FeatureCard
+          icon="shield"
+          title="Explicit install confirmation"
+          description="Because installation happens outside the Play Store, Android requires an explicit permission before the APK can install, giving you a deliberate checkpoint rather than a silent install."
+        />
+        <FeatureCard
+          icon="download"
+          title="Central, trackable version info"
+          description="This site tracks the current confirmed Gold Rummy version, file size and Android requirement in one place, so you can check you're not installing an outdated or mismatched build."
+        />
+      </div>
+
+      {
+        siteConfig.verified.referralFeatures && (
+          <>
+            <h2>Referral Program</h2>
+            <div class="grid-cards-3">
+              <FeatureCard icon="users" title="Referral rewards" description="Confirmed referral program details go here once verified." />
+            </div>
+          </>
+        )
+      }
+
+      {
+        siteConfig.verified.paymentOptions && (
+          <>
+            <h2>Payment Options</h2>
+            <div class="grid-cards-3">
+              <FeatureCard icon="lock" title="Supported payment methods" description="Confirmed payment method details go here once verified." />
+            </div>
+          </>
+        )
+      }
+
+      <h2>Features FAQs</h2>
+      <FaqAccordion items={faqItems} />
+
+      <div class="features-cta card card--raised">
+        <h2>Try These Features Yourself</h2>
+        <p class="text-muted">Download the Gold Rummy APK and explore the app firsthand.</p>
+        <DownloadCta />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 900px;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-7);
+    max-width: 70ch;
+  }
+
+  h2 {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-2xl);
+  }
+
+  .features-cta {
+    margin-top: var(--space-8);
+    text-align: center;
+  }
+
+  .features-cta h2 {
+    margin-top: 0;
+  }
+
+  .features-cta .text-muted {
+    margin-block: var(--space-3) var(--space-5);
+  }
+</style>

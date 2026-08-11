@@ -1,0 +1,133 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config/site';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Terms and Conditions', href: '/terms-and-conditions/' },
+];
+
+const lastReviewed = 'August 2026';
+---
+
+<Layout
+  title="Terms and Conditions"
+  description="The terms that apply to using this website itself — separate from Gold Rummy's own in-app terms of service, which govern the app."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="container narrow prose">
+      <p class="eyebrow">Legal</p>
+      <h1>Terms and Conditions</h1>
+      <p class="text-sm text-faint">Last reviewed: {lastReviewed}</p>
+
+      <p>
+        These terms govern your use of {siteConfig.siteName} (this website).
+        They are separate from, and do not replace, Gold Rummy's own
+        official app terms of service, which govern your use of the Gold
+        Rummy application itself.
+      </p>
+
+      <h2>Use of This Site</h2>
+      <p>
+        You may browse and use this site for personal, non-commercial
+        purposes, including to research the Gold Rummy app before deciding
+        whether to download it. You agree not to misuse the site — including
+        attempting to disrupt its operation, scrape it at a disruptive rate,
+        or use it to distribute malware or misleading content.
+      </p>
+
+      <h2>Informational Purpose Only</h2>
+      <p>
+        Content on this site — including app descriptions, feature
+        explanations, promo code information and installation guides — is
+        provided for general informational purposes. It is not a
+        substitute for Gold Rummy's own official documentation, in-app help
+        content, or customer support.
+      </p>
+
+      <h2>No Warranty</h2>
+      <p>
+        This site is provided on an "as is" and "as available" basis. We
+        don't warrant that the information here is complete, error-free, or
+        continuously available, and we disclaim warranties of any kind to
+        the fullest extent permitted by law.
+      </p>
+
+      <h2>Limitation of Liability</h2>
+      <p>
+        To the fullest extent permitted by law, {siteConfig.siteName} and
+        its operators are not liable for any loss or damage arising from
+        your use of this site, your download or installation of any
+        third-party application referenced here, or any decision made based
+        on content published on this site. This does not limit liability
+        that cannot be excluded under applicable law.
+      </p>
+
+      <h2>Downloads Are Your Responsibility</h2>
+      <p>
+        Any download or installation you perform based on information from
+        this site — including downloading the Gold Rummy APK — is done at
+        your own discretion and risk. We encourage downloading only from a
+        verified, official source and reviewing our
+        <a href="/download/">download guidance</a> and
+        <a href="/how-to-install/">installation guide</a> before proceeding.
+      </p>
+
+      <h2>Intellectual Property</h2>
+      <p>
+        Original text, design and illustrations on this site are owned by
+        this website's operator unless otherwise noted. The "Gold Rummy"
+        name and any related marks belong to their respective owners and are
+        referenced here for identification and informational purposes only.
+        See our <a href="/dmca/">DMCA / Content Removal Policy</a> for how
+        to report a content concern.
+      </p>
+
+      <h2>External Links</h2>
+      <p>
+        This site may link to Gold Rummy's app or other third-party
+        destinations. We don't control, and aren't responsible for, the
+        content or terms of external sites.
+      </p>
+
+      <h2>Changes to These Terms</h2>
+      <p>
+        We may revise these terms from time to time. Continued use of the
+        site after a change constitutes acceptance of the updated terms.
+        Material changes will update the "last reviewed" date above.
+      </p>
+
+      <h2>Governing Law</h2>
+      <p>
+        These terms are intended to be interpreted under the laws
+        applicable to this website's place of operation (jurisdiction to be
+        confirmed), without prejudice to any mandatory consumer-protection
+        rights you may have in your own location.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms can be sent through our
+        <a href="/contact/">Contact page</a>.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);
+  }
+
+  .text-sm.text-faint {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+</style>
