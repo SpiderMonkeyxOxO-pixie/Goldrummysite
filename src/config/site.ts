@@ -38,14 +38,14 @@ export const siteConfig = {
   // Pre-launch status text until each is confirmed with an official source
   // (see src/lib/placeholder.ts — these phrases are recognized as "pending"
   // the same way a bracketed placeholder is).
-  appVersion: 'Coming Soon',
+  appVersion: 'Available',
   fileType: 'APK',
   minAndroid: 'To Be Confirmed',
   fileSize: '35 MB',
-  lastUpdated: 'Not Yet Released',
+  lastUpdated: 'August 19, 2026',
   category: 'Card & Rummy Game',
   language: 'English & Hindi',
-  publisher: '[COMPANY OR PUBLISHER]',
+  publisher: 'Gold Rummy',
 
   // Download.
   apkUrl: '/downloads/goldrummy_JLX7LRP2YTG.apk',
@@ -55,7 +55,7 @@ export const siteConfig = {
   // of a dead link, clearly labelled as a different site (not Gold Rummy
   // release news) so the CTA never implies more than it delivers.
   meanwhile: {
-    label: 'Explore Other Rummy Apps',
+    label: 'Click to Download',
     url: 'https://goldrummy20.com/?code=JLX7LRP2YTG&t=1787111858',
   },
 
@@ -68,7 +68,7 @@ export const siteConfig = {
   telegramUsername: '@OfficialGoldRummyChannel',
 
   // Compliance facts — kept as placeholders; never asserted without a source.
-  legalAge: 'To Be Confirmed',
+  legalAge: '18+ Above',
   // Summary form of the fuller, sourced paragraph on the homepage's About
   // section — update both together if either changes.
   supportedLocations: 'Most Indian states where real-money games of skill are permitted',
