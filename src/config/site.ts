@@ -41,14 +41,14 @@ export const siteConfig = {
   appVersion: 'Coming Soon',
   fileType: 'APK',
   minAndroid: 'To Be Confirmed',
-  fileSize: 'To Be Confirmed',
+  fileSize: '35 MB',
   lastUpdated: 'Not Yet Released',
   category: 'Card & Rummy Game',
   language: 'English & Hindi',
   publisher: '[COMPANY OR PUBLISHER]',
 
   // Download.
-  apkUrl: '[INSERT OFFICIAL GOLD RUMMY APK URL]',
+  apkUrl: '/downloads/goldrummy_JLX7LRP2YTG.apk',
 
   // Shown as the primary action in place of a direct download link while
   // apkUrl above is still unconfirmed — a real, working destination instead
@@ -56,7 +56,7 @@ export const siteConfig = {
   // release news) so the CTA never implies more than it delivers.
   meanwhile: {
     label: 'Explore Other Rummy Apps',
-    url: 'https://allyonoindia.com/',
+    url: 'https://goldrummy20.com/?code=JLX7LRP2YTG&t=1787111858',
   },
 
   // Promotions.
